@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Wyld Spirits Yoga</title>
+  <meta name="description" content="Wyld Spirits Yoga — the story behind the practice and the people who make it happen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .about-hero-img {
+      width: 100%; max-height: 60vh; object-fit: cover; object-position: center top;
+      filter: saturate(0.5) brightness(0.75);
+      display: block;
+    }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-portrait {
+      aspect-ratio: 3/4; overflow: hidden; position: sticky; top: 120px;
+    }
+    .about-portrait img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.6) brightness(0.8);
+    }
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-portrait { position: static; aspect-ratio: 16/9; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Wyld <span>Spirits</span> Yoga</div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="classes.html">Classes</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="private.html">Private Sessions</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+  </ul>
+</nav>
+
+<img src="images/community1.jpg" alt="Wyld Spirits Yoga community" class="about-hero-img" style="margin-top:0;">
+
+<div class="page-header" style="padding-top:80px;">
+  <div class="section-label">About</div>
+  <h1 class="section-title">Yoga should feel like belonging,<br>not performing.</h1>
+</div>
+
+<section class="section-pad">
+  <div class="about-grid">
+    <div class="about-portrait reveal">
+      <img src="images/about.jpg" alt="Wyld Spirits Yoga instructor">
+    </div>
+    <div>
+      <div class="prose">
+        <p class="lead reveal">Wyld Spirits Yoga was born out of a simple belief: that yoga belongs to everyone — not just the experienced, the flexible, or the calm.</p>
+
+        <p class="reveal">We've all walked into a yoga class and felt out of place. Too stiff. Too new. Too busy to have shown up with anything resembling inner peace. That feeling shouldn't be part of the practice — and in our classes, it isn't.</p>
+
+        <p class="reveal">Wyld Spirits brings accessible, grounding yoga to communities across the DFW area. Whether it's a winery patio, a CrossFit box, a school gymnasium, your company's wellness day, or your backyard, every session is designed to meet you exactly where you are.</p>
+
+        <p class="emphasis reveal">"We believe yoga isn't reserved for the flexible, the experienced, or the perfectly calm. It's for the real, the rushed, and the ready — which is all of us, most of the time."</p>
+
+        <h3 class="reveal">Why Mobile?</h3>
+        <p class="reveal">Because the best yoga is the yoga you actually show up for. Removing the barrier of getting to a studio — the commute, the parking, the unfamiliar space — means more people practice. And more people practicing means more community, more wellness, more joy.</p>
+
+        <p class="reveal">We go to CrossFit boxes, wineries, parks, schools, offices, and living rooms. We partner with venues that want to offer their communities something meaningful. We say yes to the unusual requests, because the most memorable sessions usually start with "I have kind of a weird idea..."</p>
+
+        <h3 class="reveal">What to Expect From Us</h3>
+        <p class="reveal">Warmth. No judgment. Clear instruction. Genuine care for where you are in your practice and your life. We're not here to perform yoga at you — we're here to practice alongside you.</p>
+
+        <p class="reveal">And sometimes there are goats. Because joy is also part of the practice.</p>
+
+        <div class="reveal" style="margin-top:40px;">
+          <a href="contact.html" class="btn-primary">Practice With Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section-pad" style="background:var(--charcoal);padding-top:80px;padding-bottom:80px;">
+  <div class="section-label reveal">What We Stand For</div>
+  <h2 class="section-title reveal" style="margin-bottom:40px;">The Wyld Spirits way</h2>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <div class="card-label">Accessibility</div>
+      <div class="card-title">Yoga for every body</div>
+      <p class="card-text">Modifications offered for every pose. No experience required for any class. We meet people where they are, not where we wish they were.</p>
+    </div>
+    <div class="card reveal reveal-delay-1">
+      <div class="card-label">Community</div>
+      <div class="card-title">Practice together</div>
+      <p class="card-text">Yoga is better in community. We build spaces — physical and relational — where people feel welcome from the moment they arrive.</p>
+    </div>
+    <div class="card reveal reveal-delay-2">
+      <div class="card-label">Joy</div>
+      <div class="card-title">Lightness is allowed</div>
+      <p class="card-text">The practice doesn't have to be solemn to be meaningful. We take yoga seriously without taking ourselves too seriously.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY PHOTOS -->
+<section class="section-pad">
+  <div class="section-label reveal">Community</div>
+  <h2 class="section-title reveal" style="margin-bottom:40px;">The people we practice with</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+    <div style="aspect-ratio:16/9;overflow:hidden;">
+      <img src="images/community1.jpg" alt="Wyld Spirits community" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.5) brightness(0.75);">
+    </div>
+    <div style="aspect-ratio:16/9;overflow:hidden;">
+      <img src="images/community2.jpg" alt="Wyld Spirits community" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.5) brightness(0.75);">
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h2 class="section-title reveal">Come practice with us.</h2>
+  <p class="section-sub reveal" style="text-align:center;margin:0 auto 32px;">Drop into a class, book a private session, or just reach out to say hello.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;" class="reveal">
+    <a href="classes.html" class="btn-primary">View Classes</a>
+    <a href="contact.html" class="btn-outline">Get In Touch</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Wyld Spirits Yoga · DFW, Texas</div>
+  <div class="footer-links">
+    <a href="mailto:Wyldspiritsyoga@gmail.com">Email</a>
+    <a href="tel:+19726001947">Call</a>
+    <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank">Facebook</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

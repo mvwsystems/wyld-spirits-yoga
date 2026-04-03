@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wyld Spirits Yoga — DFW Mobile Yoga & Events</title>
+  <meta name="description" content="Wyld Spirits Yoga brings accessible, grounding yoga to communities across the DFW area. Studios, wineries, backyards, corporate events, and beyond.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ═══ HERO ═══ */
+    .hero {
+      min-height: 100vh; position: relative; display: flex;
+      align-items: flex-end; padding: 0 48px 100px; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(180deg, rgba(14,12,10,0.2) 0%, rgba(14,12,10,0.6) 60%, rgba(14,12,10,0.95) 100%),
+                  var(--charcoal);
+    }
+    .hero-bg img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.5) brightness(0.6);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 28px;
+    }
+    .hero-badge .pulse {
+      width: 8px; height: 8px; background: var(--sage);
+      border-radius: 50%; position: relative;
+    }
+    .hero-badge .pulse::after {
+      content: ''; position: absolute; inset: -4px;
+      border: 1px solid var(--sage); border-radius: 50%;
+      animation: pulseRing 2s ease-out infinite;
+    }
+    @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(2.2); opacity: 0; } }
+    .hero-title {
+      font-family: var(--font-display); font-size: clamp(3rem, 6vw, 6rem);
+      font-weight: 300; color: var(--white); line-height: 1; margin-bottom: 24px;
+    }
+    .hero-title em { color: var(--sage); font-style: italic; }
+    .hero-sub {
+      font-size: 15px; color: var(--light); max-width: 460px; line-height: 1.8;
+      margin-bottom: 36px; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+
+    /* ═══ FEATURED SECTION ═══ */
+    .featured-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 60px;
+    }
+    .featured-item {
+      position: relative; aspect-ratio: 3/4; overflow: hidden; cursor: pointer;
+    }
+    .featured-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.5) brightness(0.7);
+      transition: filter 0.6s, transform 0.7s var(--ease-expo);
+    }
+    .featured-item:hover img { filter: saturate(0.8) brightness(0.85); transform: scale(1.05); }
+    .featured-item-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14,12,10,0.9) 0%, transparent 50%);
+      display: flex; align-items: flex-end; padding: 28px;
+    }
+    .featured-item-label { font-family: var(--font-display); font-size: 22px; color: var(--white); }
+    .featured-item-sub { font-family: var(--font-mono); font-size: 10px; color: var(--sage); letter-spacing: 3px; margin-top: 4px; }
+
+    /* ═══ WHAT WE DO ═══ */
+    .what-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .what-image {
+      aspect-ratio: 4/5; overflow: hidden;
+    }
+    .what-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.6) brightness(0.8);
+    }
+
+    @media (max-width: 900px) {
+      .hero { padding: 0 24px 80px; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .featured-item { aspect-ratio: 16/9; }
+      .what-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Wyld <span>Spirits</span> Yoga</div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="classes.html">Classes</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="private.html">Private Sessions</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="images/hero.jpg" alt="Wyld Spirits Yoga — winery yoga class">
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      DFW Mobile Yoga &amp; Events
+    </div>
+    <h1 class="hero-title">
+      Move.<br>
+      Breathe.<br>
+      <em>Belong.</em>
+    </h1>
+    <p class="hero-sub">
+      Wyld Spirits brings yoga to you — wineries, studios, backyards, corporate events, and everywhere in between. Every class designed to meet you exactly where you are.
+    </p>
+    <div class="hero-actions">
+      <a href="events.html" class="btn-primary">See Upcoming Events</a>
+      <a href="private.html" class="btn-ghost">Book Private →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Winery Yoga</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Corporate Wellness</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Goat Yoga</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Bachelorette Events</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Studio Classes</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Community Flow</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Private Sessions</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Outdoor Practice</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Winery Yoga</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Corporate Wellness</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Goat Yoga</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Bachelorette Events</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Studio Classes</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Community Flow</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Private Sessions</span></span>
+    <span class="marquee-item"><span class="marquee-dot"></span><span class="marquee-text">Outdoor Practice</span></span>
+  </div>
+</div>
+
+<!-- FEATURED EXPERIENCES -->
+<section class="section-pad-wide">
+  <div class="section-label reveal">What We Offer</div>
+  <h2 class="section-title reveal">Yoga that fits<br><em style="font-style:italic;color:var(--sage);">your life.</em></h2>
+  <div class="featured-grid">
+    <a href="events.html" class="featured-item reveal">
+      <img src="images/hero.jpg" alt="Winery yoga">
+      <div class="featured-item-overlay">
+        <div>
+          <div class="featured-item-label">Winery &amp; Venue Events</div>
+          <div class="featured-item-sub">Movement + Community</div>
+        </div>
+      </div>
+    </a>
+    <a href="private.html" class="featured-item reveal reveal-delay-1">
+      <img src="images/outdoor.jpg" alt="Private yoga">
+      <div class="featured-item-overlay">
+        <div>
+          <div class="featured-item-label">Private &amp; Corporate</div>
+          <div class="featured-item-sub">Tailored to You</div>
+        </div>
+      </div>
+    </a>
+    <a href="classes.html" class="featured-item reveal reveal-delay-2">
+      <img src="images/warrior.jpg" alt="Studio classes">
+      <div class="featured-item-overlay">
+        <div>
+          <div class="featured-item-label">Studio Classes</div>
+          <div class="featured-item-sub">CrossFit Midlothian</div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT INTRO -->
+<section class="section-pad">
+  <div class="what-grid">
+    <div class="what-image reveal">
+      <img src="images/about.jpg" alt="Wyld Spirits Yoga instructor">
+    </div>
+    <div>
+      <div class="section-label reveal">About Wyld Spirits</div>
+      <h2 class="section-title reveal">A warm, inclusive space to move, breathe, and grow</h2>
+      <p class="reveal" style="font-size:15px;color:var(--light);line-height:1.85;margin-bottom:20px;">
+        Wyld Spirits Yoga brings accessible, grounding yoga to communities across the DFW area. Whether it's a winery patio, a CrossFit box, a school gymnasium, or your own backyard, every session is designed to meet you exactly where you are.
+      </p>
+      <p class="reveal" style="font-size:15px;color:var(--muted);line-height:1.85;margin-bottom:32px;">
+        We believe yoga isn't reserved for the flexible, the experienced, or the perfectly calm. It's for the real, the rushed, and the ready — which is all of us, most of the time.
+      </p>
+      <a href="about.html" class="btn-outline reveal">Our Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section-pad" style="background: var(--charcoal);">
+  <div class="section-label reveal">What People Say</div>
+  <h2 class="section-title reveal">Real words from real people</h2>
+  <div class="testimonials-grid" style="margin-top:40px;">
+    <div class="testimonial reveal">
+      <p class="testimonial-text">I've tried yoga a dozen times and always felt like I didn't belong. Wyld Spirits was the first class where I actually felt welcome from the moment I walked in. I haven't missed a session since.</p>
+      <div class="testimonial-author">Sarah M.</div>
+      <div class="testimonial-role">Studio Member, CrossFit Midlothian</div>
+    </div>
+    <div class="testimonial reveal reveal-delay-1">
+      <p class="testimonial-text">We booked Wyld Spirits for our company wellness day and it was the best decision. Every single person — from athletes to people who had never done yoga — left feeling better. Truly inclusive.</p>
+      <div class="testimonial-author">James T.</div>
+      <div class="testimonial-role">HR Director, DFW Corporate Client</div>
+    </div>
+    <div class="testimonial reveal reveal-delay-2">
+      <p class="testimonial-text">The winery yoga event was the most fun I've had at any fitness event, period. Movement, community, beautiful setting. We're already planning the next one.</p>
+      <div class="testimonial-author">Rachel K.</div>
+      <div class="testimonial-role">Sugar Ridge Winery Event Attendee</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="section-label reveal" style="justify-content:center;">Ready to Begin?</div>
+  <h2 class="section-title reveal">Your first session is waiting.</h2>
+  <p class="section-sub reveal" style="text-align:center;margin:0 auto 36px;">
+    Drop into a class, book a private session, or bring Wyld Spirits to your next event. We'd love to practice with you.
+  </p>
+  <div class="reveal" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="events.html" class="btn-primary">View Upcoming Events</a>
+    <a href="contact.html" class="btn-outline">Get In Touch</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Wyld Spirits Yoga · DFW, Texas</div>
+  <div class="footer-links">
+    <a href="mailto:Wyldspiritsyoga@gmail.com">Email</a>
+    <a href="tel:+19726001947">Call</a>
+    <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank">Facebook</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

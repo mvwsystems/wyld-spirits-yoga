@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classes — Wyld Spirits Yoga</title>
+  <meta name="description" content="Weekly yoga classes at CrossFit Midlothian and partner studios across DFW. All levels welcome.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .schedule-grid { display: flex; flex-direction: column; }
+    .schedule-row {
+      display: grid; grid-template-columns: 100px 1fr 1fr 140px;
+      gap: 24px; padding: 28px 0;
+      border-top: 1px solid var(--stone); align-items: center;
+      transition: padding-left 0.4s var(--ease-expo);
+    }
+    .schedule-row:last-child { border-bottom: 1px solid var(--stone); }
+    .schedule-row:hover { padding-left: 12px; }
+    .schedule-day {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--sage);
+    }
+    .schedule-name {
+      font-family: var(--font-display); font-size: 20px; color: var(--white);
+    }
+    .schedule-details { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .schedule-action { text-align: right; }
+    @media (max-width: 700px) {
+      .schedule-row { grid-template-columns: 1fr; gap: 8px; }
+      .schedule-action { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Wyld <span>Spirits</span> Yoga</div>
+  <div class="nav-toggle" id="navToggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="classes.html" class="active">Classes</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="private.html">Private Sessions</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="section-label">Classes</div>
+  <h1 class="section-title">Consistent practice.<br>Real community.</h1>
+  <p class="section-sub">Weekly classes at CrossFit Midlothian and rotating partner venues across DFW. All levels welcome — no experience required.</p>
+</div>
+
+<!-- WEEKLY SCHEDULE -->
+<section class="section-pad">
+  <div class="section-label reveal">Weekly Schedule</div>
+  <h2 class="section-title reveal" style="margin-bottom:40px;">Regular classes</h2>
+  <div class="schedule-grid">
+    <div class="schedule-row reveal">
+      <div class="schedule-day">Tuesday</div>
+      <div>
+        <div class="schedule-name">Morning Flow</div>
+        <div class="schedule-details" style="margin-top:4px;">CrossFit Midlothian · 6:00 AM</div>
+      </div>
+      <div class="schedule-details">All levels welcome. A grounding start to your day — breath, movement, and presence. 60 minutes.</div>
+      <div class="schedule-action"><a href="contact.html" class="btn-outline" style="font-size:9px;">Drop In</a></div>
+    </div>
+    <div class="schedule-row reveal">
+      <div class="schedule-day">Wednesday</div>
+      <div>
+        <div class="schedule-name">Power &amp; Restore</div>
+        <div class="schedule-details" style="margin-top:4px;">CrossFit Midlothian · 6:30 PM</div>
+      </div>
+      <div class="schedule-details">Evening class blending strength-building flows with restorative cool-down. 60 minutes.</div>
+      <div class="schedule-action"><a href="contact.html" class="btn-outline" style="font-size:9px;">Drop In</a></div>
+    </div>
+    <div class="schedule-row reveal">
+      <div class="schedule-day">Thursday</div>
+      <div>
+        <div class="schedule-name">Gentle Flow</div>
+        <div class="schedule-details" style="margin-top:4px;">CrossFit Midlothian · 9:00 AM</div>
+      </div>
+      <div class="schedule-details">Slower pace, deeper holds. Perfect for beginners, recovery, or those seeking a softer practice. 60 minutes.</div>
+      <div class="schedule-action"><a href="contact.html" class="btn-outline" style="font-size:9px;">Drop In</a></div>
+    </div>
+    <div class="schedule-row reveal">
+      <div class="schedule-day">Saturday</div>
+      <div>
+        <div class="schedule-name">Community Class</div>
+        <div class="schedule-details" style="margin-top:4px;">Rotating Venues · 9:00 AM</div>
+      </div>
+      <div class="schedule-details">Weekend community flow at rotating DFW locations — studios, parks, and partner venues. Check events for location.</div>
+      <div class="schedule-action"><a href="events.html" class="btn-outline" style="font-size:9px;">See Location</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section-pad" style="background:var(--charcoal);padding-top:80px;padding-bottom:80px;">
+  <div class="section-label reveal">Pricing</div>
+  <h2 class="section-title reveal" style="margin-bottom:40px;">Simple, flexible options</h2>
+  <div class="price-grid">
+    <div class="price-card reveal">
+      <div class="price-name">Drop In</div>
+      <div class="price-amount">$18</div>
+      <div class="price-period">Per Class</div>
+      <ul class="price-features">
+        <li>Single class access</li>
+        <li>Any scheduled class</li>
+        <li>All levels welcome</li>
+        <li>Mat rental available</li>
+      </ul>
+      <a href="contact.html" class="btn-primary" style="width:100%;justify-content:center;display:flex;">Reserve a Spot</a>
+    </div>
+    <div class="price-card featured reveal reveal-delay-1">
+      <div class="price-name">Monthly Pass</div>
+      <div class="price-amount">$75</div>
+      <div class="price-period">Per Month · Unlimited</div>
+      <ul class="price-features">
+        <li>Unlimited weekly classes</li>
+        <li>Priority event registration</li>
+        <li>10% off private sessions</li>
+        <li>Community member perks</li>
+        <li>Pause anytime</li>
+      </ul>
+      <a href="contact.html" class="btn-primary" style="width:100%;justify-content:center;display:flex;">Get Started</a>
+    </div>
+    <div class="price-card reveal reveal-delay-2">
+      <div class="price-name">Class Pack</div>
+      <div class="price-amount">$80</div>
+      <div class="price-period">5 Classes · No Expiry</div>
+      <ul class="price-features">
+        <li>5-class bundle</li>
+        <li>Never expires</li>
+        <li>Sharable with a friend</li>
+        <li>Any scheduled class</li>
+      </ul>
+      <a href="contact.html" class="btn-primary" style="width:100%;justify-content:center;display:flex;">Buy Pack</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="section-pad">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
+    <div>
+      <div class="section-label reveal">What to Expect</div>
+      <h2 class="section-title reveal">Your first class</h2>
+      <div class="prose reveal">
+        <p>There's no test. No perfect form required. No previous experience needed. Just show up exactly as you are.</p>
+        <p>Arrive 5–10 minutes early to get settled. Wear whatever you're comfortable moving in. Bring water. Mats are available to rent if you don't have one.</p>
+        <p class="emphasis">Every class is a beginning. We meet you there.</p>
+      </div>
+    </div>
+    <div class="cards-grid" style="grid-template-columns:1fr;margin-top:60px;">
+      <div class="card reveal">
+        <div class="card-label">Class Length</div>
+        <div class="card-title">60 minutes</div>
+        <p class="card-text">Each class runs 60 minutes — enough to go deep without going long. Warm-up, flow, and close built in.</p>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <div class="card-label">All Levels</div>
+        <div class="card-title">Truly all levels</div>
+        <p class="card-text">We mean it. Modifications offered for every pose. You'll never feel behind or left out.</p>
+      </div>
+      <div class="card reveal reveal-delay-2">
+        <div class="card-label">Equipment</div>
+        <div class="card-title">Just yourself</div>
+        <p class="card-text">Mat rentals available. Bring water and wear something you can move in. That's it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h2 class="section-title reveal">Ready to show up?</h2>
+  <p class="section-sub reveal" style="text-align:center;margin:0 auto 32px;">Reserve your spot in an upcoming class or reach out with any questions.</p>
+  <a href="contact.html" class="btn-primary reveal">Book a Class</a>
+</div>
+
+<footer>
+  <div class="footer-left">© 2026 Wyld Spirits Yoga · DFW, Texas</div>
+  <div class="footer-links">
+    <a href="mailto:Wyldspiritsyoga@gmail.com">Email</a>
+    <a href="tel:+19726001947">Call</a>
+    <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank">Facebook</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
