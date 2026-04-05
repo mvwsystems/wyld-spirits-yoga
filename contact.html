@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,114 +7,152 @@
   <meta name="description" content="Book a class, request a private session, or just say hello. Wyld Spirits Yoga serves the DFW area.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Lato:wght@100;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Sacramento&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
-    .contact-info { position: sticky; top: 120px; }
-    .contact-info-item { margin-bottom: 40px; }
-    .contact-info-label {
-      font-family: var(--font-mono); font-size: 9px; letter-spacing: 4px;
-      text-transform: uppercase; color: var(--sage); margin-bottom: 8px;
+    .font-serif  { font-family: 'Playfair Display', serif; }
+    .font-script { font-family: 'Sacramento', cursive; }
+    .font-mono   { font-family: 'JetBrains Mono', monospace; }
+    body { font-family: 'Lato', sans-serif; background-color: #F5F0EA; color: #2C2018; }
+    ::-webkit-scrollbar { width: 0.5rem; }
+    ::-webkit-scrollbar-track { background: #F5F0EA; }
+    ::-webkit-scrollbar-thumb { background: #D8CFC4; border-radius: 1rem; }
+    ::-webkit-scrollbar-thumb:hover { background: #C9B08A; }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin-slow { animation: spin-slow 20s linear infinite; }
+    input, select, textarea {
+      background: #FAF7F2;
+      border: 1px solid #D8CFC4;
+      border-radius: 0.75rem;
+      padding: 0.875rem 1rem;
+      width: 100%;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      color: #2C2018;
+      outline: none;
+      transition: border-color 0.2s;
     }
-    .contact-info-value {
-      font-family: var(--font-display); font-size: 22px; color: var(--white); line-height: 1.3;
+    input:focus, select:focus, textarea:focus {
+      border-color: #C86B4A;
+      box-shadow: 0 0 0 3px rgba(200,107,74,0.1);
     }
-    .contact-info-value a { transition: color 0.3s; }
-    .contact-info-value a:hover { color: var(--sage); }
-    @media (max-width: 900px) {
-      .contact-grid { grid-template-columns: 1fr; }
-      .contact-info { position: static; }
+    input::placeholder, textarea::placeholder { color: #C9B08A; }
+    select { appearance: none; cursor: pointer; }
+    label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6B4F3F;
+      margin-bottom: 0.5rem;
     }
   </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden selection:bg-[#C86B4A] selection:text-[#FAF7F2]">
 
-<nav>
-  <div class="nav-logo">Wyld <span>Spirits</span> Yoga</div>
-  <div class="nav-toggle" id="navToggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
-  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="classes.html">Classes</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="private.html">Private Sessions</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
-  </ul>
+<!-- NOISE OVERLAY -->
+<div style="position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.04;mix-blend-mode:multiply;background-image:url('data:image/svg+xml,%3Csvg viewBox%3D%220 0 200 200%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter id%3D%22n%22%3E%3CfeTurbulence type%3D%22fractalNoise%22 baseFrequency%3D%220.8%22 numOctaves%3D%223%22 stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E');"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95vw] md:w-[90vw] lg:w-[70vw] rounded-full transition-all duration-500 py-3 px-6 md:px-8 flex justify-between items-center border" style="background:rgba(44,32,24,0.85);backdrop-filter:blur(12px);border-color:rgba(201,176,138,0.2);color:#FAF7F2;">
+  <div class="flex items-center gap-3">
+    <div class="relative w-8 h-8 flex items-center justify-center text-[#E8A820]">
+      <i data-lucide="sun" class="absolute spin-slow opacity-80 w-full h-full"></i>
+      <span class="font-script text-2xl relative z-10 -rotate-12 mt-1">W</span>
+    </div>
+    <a href="index.html" class="font-serif italic tracking-tight text-xl md:text-2xl hidden md:block mt-1 text-[#FAF7F2]">Wyld Spirits Yoga</a>
+  </div>
+  <div class="hidden lg:flex items-center gap-8 text-base font-normal tracking-wide">
+    <a href="classes.html" class="hover:text-[#C86B4A] transition-colors relative group">Classes<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="events.html" class="hover:text-[#C86B4A] transition-colors relative group">Events<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="private.html" class="hover:text-[#C86B4A] transition-colors relative group">Private<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="about.html" class="hover:text-[#C86B4A] transition-colors relative group">About<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+  </div>
+  <a href="contact.html" class="bg-[#C86B4A] text-[#FAF7F2] px-5 py-2.5 rounded-full text-sm md:text-base font-normal tracking-wide border border-[#C86B4A]/20">Book a Class</a>
 </nav>
 
-<div class="page-header">
-  <div class="section-label">Contact</div>
-  <h1 class="section-title">Let's start<br>something.</h1>
-  <p class="section-sub">Whether you want to drop into a class, book a private session, or have a completely different idea — reach out. We respond fast.</p>
+<!-- PAGE HEADER -->
+<div class="pt-40 pb-16 px-[5vw] md:px-[10vw] bg-[#3F5D4A]">
+  <div class="max-w-5xl mx-auto">
+    <span class="font-mono text-sm tracking-widest text-[#C9B08A] uppercase mb-4 block">Contact</span>
+    <h1 class="font-serif italic text-5xl md:text-7xl font-normal tracking-tight text-[#FAF7F2] leading-none mb-6">Let's start<br>something.</h1>
+    <p class="text-[#D8CFC4] font-thin text-lg max-w-xl">Whether you want to drop into a class, book a private session, or have a completely different idea — reach out. We respond fast.</p>
+  </div>
 </div>
 
-<section class="section-pad">
-  <div class="contact-grid">
-    <!-- Contact Info -->
-    <div class="contact-info">
-      <div class="contact-info-item reveal">
-        <div class="contact-info-label">Email</div>
-        <div class="contact-info-value">
-          <a href="mailto:Wyldspiritsyoga@gmail.com">Wyldspiritsyoga<br>@gmail.com</a>
+<!-- CONTACT BODY -->
+<section class="py-[10vh] px-[5vw] md:px-[10vw] bg-[#F5F0EA]">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-16 lg:gap-20 items-start">
+
+    <!-- Info Column -->
+    <div class="lg:sticky lg:top-32 space-y-10">
+      <div class="gs-reveal">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-3">Email</div>
+        <a href="mailto:Wyldspiritsyoga@gmail.com" class="font-serif text-2xl text-[#2C2018] hover:text-[#C86B4A] transition-colors leading-snug block">Wyldspiritsyoga<br>@gmail.com</a>
+      </div>
+      <div class="gs-reveal">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-3">Phone</div>
+        <a href="tel:+19726001947" class="font-serif text-2xl text-[#2C2018] hover:text-[#C86B4A] transition-colors">(972) 600-1947</a>
+      </div>
+      <div class="gs-reveal">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-3">Location</div>
+        <div class="font-serif text-2xl text-[#2C2018] leading-snug">DFW Area<br><span class="text-base font-sans font-thin text-[#6B4F3F]">Midlothian, TX &amp; surrounding</span></div>
+      </div>
+      <div class="gs-reveal">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-4">Follow Along</div>
+        <div class="flex gap-3">
+          <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank" class="border border-[#6B4F3F]/30 text-[#2C2018] px-4 py-2 rounded-lg text-sm font-mono tracking-wider hover:bg-[#D8CFC4] transition-colors">Instagram</a>
+          <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank" class="border border-[#6B4F3F]/30 text-[#2C2018] px-4 py-2 rounded-lg text-sm font-mono tracking-wider hover:bg-[#D8CFC4] transition-colors">Facebook</a>
         </div>
       </div>
-      <div class="contact-info-item reveal">
-        <div class="contact-info-label">Phone</div>
-        <div class="contact-info-value">
-          <a href="tel:+19726001947">(972) 600-1947</a>
-        </div>
-      </div>
-      <div class="contact-info-item reveal">
-        <div class="contact-info-label">Location</div>
-        <div class="contact-info-value">
-          DFW Area<br>
-          <span style="font-size:16px;color:var(--muted);">Midlothian, TX &amp; surrounding</span>
-        </div>
-      </div>
-      <div class="contact-info-item reveal">
-        <div class="contact-info-label">Follow Along</div>
-        <div style="display:flex;gap:16px;margin-top:4px;">
-          <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank" class="btn-outline" style="font-size:9px;">Instagram</a>
-          <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank" class="btn-outline" style="font-size:9px;">Facebook</a>
-        </div>
+
+      <!-- Locations -->
+      <div class="gs-reveal pt-4 border-t border-[#D8CFC4]">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-4">Studio Locations</div>
+        <ul class="space-y-3 text-sm font-thin text-[#6B4F3F]">
+          <li class="flex items-start gap-2"><span class="text-[#3F5D4A] mt-0.5">✦</span> Half Moon Yoga — Waxahachie, TX</li>
+          <li class="flex items-start gap-2"><span class="text-[#3F5D4A] mt-0.5">✦</span> Crescent Yoga — Midlothian, TX</li>
+          <li class="flex items-start gap-2"><span class="text-[#3F5D4A] mt-0.5">✦</span> CrossFit Midlothian — Midlothian, TX</li>
+        </ul>
       </div>
     </div>
 
-    <!-- Contact Form -->
-    <div class="reveal">
-      <div class="section-label" style="margin-bottom:32px;">Send a Message</div>
-      <form action="https://formsubmit.co/Wyldspiritsyoga@gmail.com" method="POST" style="display:flex;flex-direction:column;gap:20px;">
+    <!-- Form Column -->
+    <div class="gs-reveal">
+      <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-8">Send a Message</div>
+      <form action="https://formsubmit.co/Wyldspiritsyoga@gmail.com" method="POST" class="flex flex-col gap-5">
         <input type="hidden" name="_subject" value="New Wyld Spirits Yoga Inquiry">
         <input type="hidden" name="_next" value="https://wyldspiritsyoga.com/contact.html?sent=true">
         <input type="hidden" name="_captcha" value="false">
 
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label">First Name</label>
-            <input class="form-input" type="text" name="first_name" placeholder="Your first name" required>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label>First Name</label>
+            <input type="text" name="first_name" placeholder="Your first name" required>
           </div>
-          <div class="form-group">
-            <label class="form-label">Last Name</label>
-            <input class="form-input" type="text" name="last_name" placeholder="Your last name">
+          <div>
+            <label>Last Name</label>
+            <input type="text" name="last_name" placeholder="Your last name">
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" name="email" placeholder="your@email.com" required>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" placeholder="your@email.com" required>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Phone (optional)</label>
-          <input class="form-input" type="tel" name="phone" placeholder="(972) 000-0000">
+        <div>
+          <label>Phone (optional)</label>
+          <input type="tel" name="phone" placeholder="(972) 000-0000">
         </div>
 
-        <div class="form-group">
-          <label class="form-label">What are you looking for?</label>
-          <select class="form-select form-input" name="inquiry_type" required>
+        <div>
+          <label>What are you looking for?</label>
+          <select name="inquiry_type" required>
             <option value="" disabled selected>Select an option</option>
             <option value="drop-in">Drop into a class</option>
             <option value="private-individual">Private one-on-one session</option>
@@ -126,28 +164,60 @@
           </select>
         </div>
 
-        <div class="form-group full">
-          <label class="form-label">Tell us more</label>
-          <textarea class="form-textarea form-input" name="message" placeholder="Dates, group size, location preferences, goals — whatever helps us understand what you need." style="min-height:140px;"></textarea>
+        <div>
+          <label>Tell us more</label>
+          <textarea name="message" rows="5" placeholder="Dates, group size, location preferences, goals — whatever helps us understand what you need."></textarea>
         </div>
 
-        <button type="submit" class="btn-primary" style="align-self:flex-start;">Send Message</button>
-        <p style="font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:2px;">We respond within 24 hours.</p>
+        <div class="flex items-center gap-6">
+          <button type="submit" class="bg-[#C86B4A] text-[#FAF7F2] px-8 py-4 rounded-full text-base font-normal tracking-wide hover:bg-[#A65639] transition-colors">Send Message</button>
+          <span class="font-mono text-xs text-[#6B4F3F] tracking-widest uppercase">We respond within 24 hours.</span>
+        </div>
       </form>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="footer-left">© 2026 Wyld Spirits Yoga · DFW, Texas</div>
-  <div class="footer-links">
-    <a href="mailto:Wyldspiritsyoga@gmail.com">Email</a>
-    <a href="tel:+19726001947">Call</a>
-    <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank">Instagram</a>
-    <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank">Facebook</a>
+<!-- FOOTER -->
+<footer class="bg-[#2C2018] text-[#D8CFC4] py-16 px-[5vw] md:px-[10vw]">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+    <div>
+      <span class="font-serif italic text-2xl text-[#FAF7F2] block mb-3">Wyld Spirits Yoga</span>
+      <p class="font-thin text-sm text-[#D8CFC4]/70 max-w-xs">Untamed movement, grounded spirit. DFW area yoga for every body.</p>
+    </div>
+    <div class="flex flex-wrap gap-12">
+      <div>
+        <p class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-4">Pages</p>
+        <ul class="space-y-2 text-sm font-thin">
+          <li><a href="index.html" class="hover:text-[#C86B4A] transition-colors">Home</a></li>
+          <li><a href="classes.html" class="hover:text-[#C86B4A] transition-colors">Classes</a></li>
+          <li><a href="events.html" class="hover:text-[#C86B4A] transition-colors">Events</a></li>
+          <li><a href="private.html" class="hover:text-[#C86B4A] transition-colors">Private Sessions</a></li>
+          <li><a href="about.html" class="hover:text-[#C86B4A] transition-colors">About</a></li>
+          <li><a href="contact.html" class="hover:text-[#C86B4A] transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-4">Contact</p>
+        <ul class="space-y-2 text-sm font-thin">
+          <li><a href="mailto:Wyldspiritsyoga@gmail.com" class="hover:text-[#C86B4A] transition-colors">Wyldspiritsyoga@gmail.com</a></li>
+          <li><a href="tel:+19726001947" class="hover:text-[#C86B4A] transition-colors">(972) 600-1947</a></li>
+          <li>DFW Area, Texas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mt-12 pt-8 border-t border-[#6B4F3F]/30 text-center font-mono text-xs text-[#6B4F3F] tracking-widest uppercase">
+    © 2025 Wyld Spirits Yoga — All rights reserved
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+  lucide.createIcons();
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.gs-reveal').forEach(el => {
+    gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 85%' }, y: 40, opacity: 0, duration: 0.8, ease: 'power2.out' });
+  });
+</script>
 </body>
 </html>

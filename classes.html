@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,193 +7,236 @@
   <meta name="description" content="Weekly yoga classes at CrossFit Midlothian and partner studios across DFW. All levels welcome.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Lato:wght@100;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Sacramento&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
-    .schedule-grid { display: flex; flex-direction: column; }
-    .schedule-row {
-      display: grid; grid-template-columns: 100px 1fr 1fr 140px;
-      gap: 24px; padding: 28px 0;
-      border-top: 1px solid var(--stone); align-items: center;
-      transition: padding-left 0.4s var(--ease-expo);
-    }
-    .schedule-row:last-child { border-bottom: 1px solid var(--stone); }
-    .schedule-row:hover { padding-left: 12px; }
-    .schedule-day {
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--sage);
-    }
-    .schedule-name {
-      font-family: var(--font-display); font-size: 20px; color: var(--white);
-    }
-    .schedule-details { font-size: 13px; color: var(--muted); line-height: 1.5; }
-    .schedule-action { text-align: right; }
-    @media (max-width: 700px) {
-      .schedule-row { grid-template-columns: 1fr; gap: 8px; }
-      .schedule-action { text-align: left; }
-    }
+    .font-serif  { font-family: 'Playfair Display', serif; }
+    .font-script { font-family: 'Sacramento', cursive; }
+    .font-mono   { font-family: 'JetBrains Mono', monospace; }
+    body { font-family: 'Lato', sans-serif; background-color: #F5F0EA; color: #2C2018; }
+    ::-webkit-scrollbar { width: 0.5rem; }
+    ::-webkit-scrollbar-track { background: #F5F0EA; }
+    ::-webkit-scrollbar-thumb { background: #D8CFC4; border-radius: 1rem; }
+    ::-webkit-scrollbar-thumb:hover { background: #C9B08A; }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin-slow { animation: spin-slow 20s linear infinite; }
   </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden selection:bg-[#C86B4A] selection:text-[#FAF7F2]">
 
-<nav>
-  <div class="nav-logo">Wyld <span>Spirits</span> Yoga</div>
-  <div class="nav-toggle" id="navToggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
-  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="classes.html" class="active">Classes</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="private.html">Private Sessions</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
-  </ul>
+<!-- NOISE OVERLAY -->
+<div style="position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.04;mix-blend-mode:multiply;background-image:url('data:image/svg+xml,%3Csvg viewBox%3D%220 0 200 200%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter id%3D%22n%22%3E%3CfeTurbulence type%3D%22fractalNoise%22 baseFrequency%3D%220.8%22 numOctaves%3D%223%22 stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E');"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95vw] md:w-[90vw] lg:w-[70vw] rounded-full transition-all duration-500 py-3 px-6 md:px-8 flex justify-between items-center border border-transparent" style="background:rgba(44,32,24,0.85);backdrop-filter:blur(12px);border-color:rgba(201,176,138,0.2);color:#FAF7F2;">
+  <div class="flex items-center gap-3">
+    <div class="relative w-8 h-8 flex items-center justify-center text-[#E8A820]">
+      <i data-lucide="sun" class="absolute spin-slow opacity-80 w-full h-full"></i>
+      <span class="font-script text-2xl relative z-10 -rotate-12 mt-1">W</span>
+    </div>
+    <a href="index.html" class="font-serif italic tracking-tight text-xl md:text-2xl hidden md:block mt-1 text-[#FAF7F2]">Wyld Spirits Yoga</a>
+  </div>
+  <div class="hidden lg:flex items-center gap-8 text-base font-normal tracking-wide">
+    <a href="classes.html" class="text-[#C86B4A] relative group">Classes<span class="absolute -bottom-1 left-0 w-full h-[1px] bg-[#C86B4A]"></span></a>
+    <a href="events.html" class="hover:text-[#C86B4A] transition-colors relative group">Events<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="private.html" class="hover:text-[#C86B4A] transition-colors relative group">Private<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="about.html" class="hover:text-[#C86B4A] transition-colors relative group">About<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+  </div>
+  <a href="contact.html" class="bg-[#C86B4A] text-[#FAF7F2] px-5 py-2.5 rounded-full text-sm md:text-base font-normal tracking-wide border border-[#C86B4A]/20 hover:bg-[#A65639] transition-colors">Book a Class</a>
 </nav>
 
-<div class="page-header">
-  <div class="section-label">Classes</div>
-  <h1 class="section-title">Consistent practice.<br>Real community.</h1>
-  <p class="section-sub">Weekly classes at CrossFit Midlothian and rotating partner venues across DFW. All levels welcome — no experience required.</p>
-</div>
+<!-- PAGE HERO -->
+<header class="relative h-[60vh] w-full flex items-end justify-start pb-[8vh] px-[5vw] md:px-[10vw] overflow-hidden bg-[#2C2018]">
+  <div class="absolute inset-0 w-full h-full">
+    <img src="images/warrior.jpg" alt="Yoga class" class="w-full h-full object-cover object-center opacity-60">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#2C2018] via-[#2C2018]/50 to-transparent"></div>
+  <div class="relative z-10 text-[#FAF7F2]">
+    <span class="font-mono text-sm tracking-widest text-[#C9B08A] uppercase mb-4 block">Classes &amp; Schedule</span>
+    <h1 class="font-serif italic text-5xl md:text-7xl font-normal tracking-tight leading-none">Consistent practice.<br>Real community.</h1>
+  </div>
+</header>
 
-<!-- WEEKLY SCHEDULE -->
-<section class="section-pad">
-  <div class="section-label reveal">Weekly Schedule</div>
-  <h2 class="section-title reveal" style="margin-bottom:40px;">Regular classes</h2>
-  <div class="schedule-grid">
-    <div class="schedule-row reveal">
-      <div class="schedule-day">Tuesday</div>
-      <div>
-        <div class="schedule-name">Morning Flow</div>
-        <div class="schedule-details" style="margin-top:4px;">CrossFit Midlothian · 6:00 AM</div>
-      </div>
-      <div class="schedule-details">All levels welcome. A grounding start to your day — breath, movement, and presence. 60 minutes.</div>
-      <div class="schedule-action"><a href="contact.html" class="btn-outline" style="font-size:9px;">Drop In</a></div>
+<!-- SCHEDULE -->
+<section class="py-[12vh] px-[5vw] md:px-[10vw] bg-[#F5F0EA]">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-12 gs-reveal">
+      <span class="font-mono text-sm tracking-widest text-[#C86B4A] uppercase mb-4 block">Weekly Schedule</span>
+      <h2 class="font-serif text-4xl md:text-5xl font-normal tracking-tight text-[#2C2018]">Regular classes</h2>
     </div>
-    <div class="schedule-row reveal">
-      <div class="schedule-day">Wednesday</div>
-      <div>
-        <div class="schedule-name">Power &amp; Restore</div>
-        <div class="schedule-details" style="margin-top:4px;">CrossFit Midlothian · 6:30 PM</div>
+    <div class="flex flex-col">
+      <div class="gs-reveal grid grid-cols-1 md:grid-cols-[120px_1fr_1fr_160px] gap-4 md:gap-6 py-8 border-t border-[#D8CFC4] items-start md:items-center group hover:pl-3 transition-all duration-300">
+        <div class="font-mono text-xs tracking-widest text-[#3F5D4A] uppercase">Tuesday</div>
+        <div>
+          <div class="font-serif text-xl md:text-2xl text-[#2C2018] mb-1">Morning Flow</div>
+          <div class="text-sm text-[#6B4F3F] font-thin">CrossFit Midlothian · 6:00 AM</div>
+        </div>
+        <div class="text-sm text-[#6B4F3F] font-thin leading-relaxed">All levels welcome. A grounding start to your day — breath, movement, and presence. 60 minutes.</div>
+        <div class="md:text-right"><a href="contact.html" class="inline-block border border-[#6B4F3F]/30 text-[#2C2018] px-4 py-2 rounded-lg text-sm font-mono tracking-wider hover:bg-[#D8CFC4] transition-colors">Drop In</a></div>
       </div>
-      <div class="schedule-details">Evening class blending strength-building flows with restorative cool-down. 60 minutes.</div>
-      <div class="schedule-action"><a href="contact.html" class="btn-outline" style="font-size:9px;">Drop In</a></div>
-    </div>
-    <div class="schedule-row reveal">
-      <div class="schedule-day">Thursday</div>
-      <div>
-        <div class="schedule-name">Gentle Flow</div>
-        <div class="schedule-details" style="margin-top:4px;">CrossFit Midlothian · 9:00 AM</div>
+      <div class="gs-reveal grid grid-cols-1 md:grid-cols-[120px_1fr_1fr_160px] gap-4 md:gap-6 py-8 border-t border-[#D8CFC4] items-start md:items-center group hover:pl-3 transition-all duration-300">
+        <div class="font-mono text-xs tracking-widest text-[#3F5D4A] uppercase">Wednesday</div>
+        <div>
+          <div class="font-serif text-xl md:text-2xl text-[#2C2018] mb-1">Half Moon Flow</div>
+          <div class="text-sm text-[#6B4F3F] font-thin">Half Moon Yoga, Waxahachie · 3rd Wed of Month</div>
+        </div>
+        <div class="text-sm text-[#6B4F3F] font-thin leading-relaxed">Community class at Half Moon Yoga. Select Saturdays also available — check events for schedule.</div>
+        <div class="md:text-right"><a href="contact.html" class="inline-block border border-[#6B4F3F]/30 text-[#2C2018] px-4 py-2 rounded-lg text-sm font-mono tracking-wider hover:bg-[#D8CFC4] transition-colors">Drop In</a></div>
       </div>
-      <div class="schedule-details">Slower pace, deeper holds. Perfect for beginners, recovery, or those seeking a softer practice. 60 minutes.</div>
-      <div class="schedule-action"><a href="contact.html" class="btn-outline" style="font-size:9px;">Drop In</a></div>
-    </div>
-    <div class="schedule-row reveal">
-      <div class="schedule-day">Saturday</div>
-      <div>
-        <div class="schedule-name">Community Class</div>
-        <div class="schedule-details" style="margin-top:4px;">Rotating Venues · 9:00 AM</div>
+      <div class="gs-reveal grid grid-cols-1 md:grid-cols-[120px_1fr_1fr_160px] gap-4 md:gap-6 py-8 border-t border-[#D8CFC4] items-start md:items-center group hover:pl-3 transition-all duration-300">
+        <div class="font-mono text-xs tracking-widest text-[#3F5D4A] uppercase">Thursday</div>
+        <div>
+          <div class="font-serif text-xl md:text-2xl text-[#2C2018] mb-1">Gentle Flow</div>
+          <div class="text-sm text-[#6B4F3F] font-thin">CrossFit Midlothian · Every Other Thu</div>
+        </div>
+        <div class="text-sm text-[#6B4F3F] font-thin leading-relaxed">Slower pace, deeper holds. Perfect for beginners, recovery, or those seeking a softer practice. 60 minutes.</div>
+        <div class="md:text-right"><a href="contact.html" class="inline-block border border-[#6B4F3F]/30 text-[#2C2018] px-4 py-2 rounded-lg text-sm font-mono tracking-wider hover:bg-[#D8CFC4] transition-colors">Drop In</a></div>
       </div>
-      <div class="schedule-details">Weekend community flow at rotating DFW locations — studios, parks, and partner venues. Check events for location.</div>
-      <div class="schedule-action"><a href="events.html" class="btn-outline" style="font-size:9px;">See Location</a></div>
+      <div class="gs-reveal grid grid-cols-1 md:grid-cols-[120px_1fr_1fr_160px] gap-4 md:gap-6 py-8 border-t border-[#D8CFC4] border-b border-b-[#D8CFC4] items-start md:items-center group hover:pl-3 transition-all duration-300">
+        <div class="font-mono text-xs tracking-widest text-[#3F5D4A] uppercase">Saturday</div>
+        <div>
+          <div class="font-serif text-xl md:text-2xl text-[#2C2018] mb-1">Community Class</div>
+          <div class="text-sm text-[#6B4F3F] font-thin">CrossFit Midlothian + Crescent Yoga · Every Sat</div>
+        </div>
+        <div class="text-sm text-[#6B4F3F] font-thin leading-relaxed">Weekend community flow at rotating DFW locations — studios, parks, and partner venues.</div>
+        <div class="md:text-right"><a href="events.html" class="inline-block border border-[#6B4F3F]/30 text-[#2C2018] px-4 py-2 rounded-lg text-sm font-mono tracking-wider hover:bg-[#D8CFC4] transition-colors">See Location</a></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section class="section-pad" style="background:var(--charcoal);padding-top:80px;padding-bottom:80px;">
-  <div class="section-label reveal">Pricing</div>
-  <h2 class="section-title reveal" style="margin-bottom:40px;">Simple, flexible options</h2>
-  <div class="price-grid">
-    <div class="price-card reveal">
-      <div class="price-name">Drop In</div>
-      <div class="price-amount">$18</div>
-      <div class="price-period">Per Class</div>
-      <ul class="price-features">
-        <li>Single class access</li>
-        <li>Any scheduled class</li>
-        <li>All levels welcome</li>
-        <li>Mat rental available</li>
-      </ul>
-      <a href="contact.html" class="btn-primary" style="width:100%;justify-content:center;display:flex;">Reserve a Spot</a>
+<section class="py-[12vh] px-[5vw] md:px-[10vw] bg-[#3F5D4A] rounded-[3rem] mx-4 md:mx-8 mb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 gs-reveal">
+      <span class="font-mono text-sm tracking-widest text-[#C9B08A] uppercase mb-4 block">Pricing</span>
+      <h2 class="font-serif text-4xl md:text-6xl font-normal tracking-tight text-[#FAF7F2] mb-6">Simple, flexible options</h2>
     </div>
-    <div class="price-card featured reveal reveal-delay-1">
-      <div class="price-name">Monthly Pass</div>
-      <div class="price-amount">$75</div>
-      <div class="price-period">Per Month · Unlimited</div>
-      <ul class="price-features">
-        <li>Unlimited weekly classes</li>
-        <li>Priority event registration</li>
-        <li>10% off private sessions</li>
-        <li>Community member perks</li>
-        <li>Pause anytime</li>
-      </ul>
-      <a href="contact.html" class="btn-primary" style="width:100%;justify-content:center;display:flex;">Get Started</a>
-    </div>
-    <div class="price-card reveal reveal-delay-2">
-      <div class="price-name">Class Pack</div>
-      <div class="price-amount">$80</div>
-      <div class="price-period">5 Classes · No Expiry</div>
-      <ul class="price-features">
-        <li>5-class bundle</li>
-        <li>Never expires</li>
-        <li>Sharable with a friend</li>
-        <li>Any scheduled class</li>
-      </ul>
-      <a href="contact.html" class="btn-primary" style="width:100%;justify-content:center;display:flex;">Buy Pack</a>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="gs-reveal bg-[#F5F0EA] rounded-[2rem] p-8 flex flex-col md:mt-8">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-3">Drop In</div>
+        <div class="font-serif text-5xl font-normal text-[#2C2018] mb-1">$18</div>
+        <div class="text-sm text-[#6B4F3F] font-mono mb-6">Per Class</div>
+        <ul class="space-y-2 text-sm text-[#6B4F3F] font-thin mb-8 flex-1">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#3F5D4A]"></i> Single class access</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#3F5D4A]"></i> Any scheduled class</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#3F5D4A]"></i> All levels welcome</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#3F5D4A]"></i> Mat rental available</li>
+        </ul>
+        <a href="contact.html" class="w-full text-center border border-[#6B4F3F]/30 text-[#2C2018] px-6 py-3 rounded-xl text-base font-normal hover:bg-[#D8CFC4] transition-colors">Reserve a Spot</a>
+      </div>
+      <div class="gs-reveal bg-[#C86B4A] rounded-[2rem] p-8 flex flex-col relative md:-translate-y-4 shadow-xl">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#2C2018] text-[#FAF7F2] text-xs font-mono tracking-widest uppercase px-4 py-1.5 rounded-full border border-[#6B4F3F]">Best Value</div>
+        <div class="font-mono text-xs tracking-widest text-[#F5F0EA]/70 uppercase mb-3 mt-4">Monthly Pass</div>
+        <div class="font-serif text-5xl font-normal text-[#FAF7F2] mb-1">$75</div>
+        <div class="text-sm text-[#F5F0EA]/70 font-mono mb-6">Per Month · Unlimited</div>
+        <ul class="space-y-2 text-sm text-[#F5F0EA]/80 font-thin mb-8 flex-1">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#FAF7F2]"></i> Unlimited weekly classes</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#FAF7F2]"></i> Priority event registration</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#FAF7F2]"></i> 10% off private sessions</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#FAF7F2]"></i> Community member perks</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#FAF7F2]"></i> Pause anytime</li>
+        </ul>
+        <a href="contact.html" class="w-full text-center bg-[#FAF7F2] text-[#C86B4A] px-6 py-3.5 rounded-xl text-base font-normal tracking-wide shadow-lg hover:bg-[#F5F0EA] transition-colors">Get Started</a>
+      </div>
+      <div class="gs-reveal bg-[#F5F0EA] rounded-[2rem] p-8 flex flex-col md:mt-8">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-3">Class Pack</div>
+        <div class="font-serif text-5xl font-normal text-[#2C2018] mb-1">$80</div>
+        <div class="text-sm text-[#6B4F3F] font-mono mb-6">5 Classes · No Expiry</div>
+        <ul class="space-y-2 text-sm text-[#6B4F3F] font-thin mb-8 flex-1">
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#3F5D4A]"></i> 5-class bundle</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#3F5D4A]"></i> Never expires</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#3F5D4A]"></i> Sharable with a friend</li>
+          <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#3F5D4A]"></i> Any scheduled class</li>
+        </ul>
+        <a href="contact.html" class="w-full text-center border border-[#6B4F3F]/30 text-[#2C2018] px-6 py-3 rounded-xl text-base font-normal hover:bg-[#D8CFC4] transition-colors">Buy Pack</a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- WHAT TO EXPECT -->
-<section class="section-pad">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
-    <div>
-      <div class="section-label reveal">What to Expect</div>
-      <h2 class="section-title reveal">Your first class</h2>
-      <div class="prose reveal">
+<section class="py-[12vh] px-[5vw] md:px-[10vw] bg-[#F5F0EA]">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <div class="gs-reveal">
+      <span class="font-mono text-sm tracking-widest text-[#C86B4A] uppercase mb-4 block">What to Expect</span>
+      <h2 class="font-serif text-4xl md:text-5xl font-normal tracking-tight text-[#2C2018] mb-8">Your first class</h2>
+      <div class="text-[#6B4F3F] font-thin leading-relaxed space-y-5 text-lg">
         <p>There's no test. No perfect form required. No previous experience needed. Just show up exactly as you are.</p>
         <p>Arrive 5–10 minutes early to get settled. Wear whatever you're comfortable moving in. Bring water. Mats are available to rent if you don't have one.</p>
-        <p class="emphasis">Every class is a beginning. We meet you there.</p>
+        <p class="font-serif italic text-[#2C2018] text-xl">"Every class is a beginning. We meet you there."</p>
       </div>
     </div>
-    <div class="cards-grid" style="grid-template-columns:1fr;margin-top:60px;">
-      <div class="card reveal">
-        <div class="card-label">Class Length</div>
-        <div class="card-title">60 minutes</div>
-        <p class="card-text">Each class runs 60 minutes — enough to go deep without going long. Warm-up, flow, and close built in.</p>
+    <div class="flex flex-col gap-4">
+      <div class="gs-reveal bg-[#FAF7F2] border border-[#C9B08A]/30 rounded-[2rem] p-8 hover:-translate-y-1 transition-all duration-500 shadow-sm hover:shadow-md">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-2">Class Length</div>
+        <div class="font-serif text-2xl text-[#2C2018] mb-3">60 minutes</div>
+        <p class="text-[#6B4F3F] text-sm font-thin leading-relaxed">Each class runs 60 minutes — enough to go deep without going long. Warm-up, flow, and close built in.</p>
       </div>
-      <div class="card reveal reveal-delay-1">
-        <div class="card-label">All Levels</div>
-        <div class="card-title">Truly all levels</div>
-        <p class="card-text">We mean it. Modifications offered for every pose. You'll never feel behind or left out.</p>
+      <div class="gs-reveal bg-[#FAF7F2] border border-[#C9B08A]/30 rounded-[2rem] p-8 hover:-translate-y-1 transition-all duration-500 shadow-sm hover:shadow-md">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-2">All Levels</div>
+        <div class="font-serif text-2xl text-[#2C2018] mb-3">Truly all levels</div>
+        <p class="text-[#6B4F3F] text-sm font-thin leading-relaxed">We mean it. Modifications offered for every pose. You'll never feel behind or left out.</p>
       </div>
-      <div class="card reveal reveal-delay-2">
-        <div class="card-label">Equipment</div>
-        <div class="card-title">Just yourself</div>
-        <p class="card-text">Mat rentals available. Bring water and wear something you can move in. That's it.</p>
+      <div class="gs-reveal bg-[#FAF7F2] border border-[#C9B08A]/30 rounded-[2rem] p-8 hover:-translate-y-1 transition-all duration-500 shadow-sm hover:shadow-md">
+        <div class="font-mono text-xs tracking-widest text-[#C86B4A] uppercase mb-2">Equipment</div>
+        <div class="font-serif text-2xl text-[#2C2018] mb-3">Just yourself</div>
+        <p class="text-[#6B4F3F] text-sm font-thin leading-relaxed">Mat rentals available. Bring water and wear something you can move in. That's it.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="cta-banner">
-  <h2 class="section-title reveal">Ready to show up?</h2>
-  <p class="section-sub reveal" style="text-align:center;margin:0 auto 32px;">Reserve your spot in an upcoming class or reach out with any questions.</p>
-  <a href="contact.html" class="btn-primary reveal">Book a Class</a>
-</div>
+<!-- CTA -->
+<section class="py-[10vh] px-[5vw] md:px-[10vw] bg-[#2C2018] text-center">
+  <h2 class="gs-reveal font-serif text-4xl md:text-6xl font-normal tracking-tight text-[#FAF7F2] mb-6">Ready to show up?</h2>
+  <p class="gs-reveal text-[#D8CFC4] font-thin text-lg mb-10 max-w-md mx-auto">Reserve your spot in an upcoming class or reach out with any questions.</p>
+  <a href="contact.html" class="gs-reveal inline-block bg-[#C86B4A] text-[#FAF7F2] px-10 py-4 rounded-full text-base font-normal tracking-wide hover:bg-[#A65639] transition-colors">Book a Class</a>
+</section>
 
-<footer>
-  <div class="footer-left">© 2026 Wyld Spirits Yoga · DFW, Texas</div>
-  <div class="footer-links">
-    <a href="mailto:Wyldspiritsyoga@gmail.com">Email</a>
-    <a href="tel:+19726001947">Call</a>
-    <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank">Instagram</a>
-    <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank">Facebook</a>
+<!-- FOOTER -->
+<footer class="bg-[#2C2018] text-[#D8CFC4] py-16 px-[5vw] md:px-[10vw]">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+    <div>
+      <span class="font-serif italic text-2xl text-[#FAF7F2] block mb-3">Wyld Spirits Yoga</span>
+      <p class="font-thin text-sm text-[#D8CFC4]/70 max-w-xs">Untamed movement, grounded spirit. DFW area yoga for every body.</p>
+    </div>
+    <div class="flex flex-wrap gap-12">
+      <div>
+        <p class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-4">Pages</p>
+        <ul class="space-y-2 text-sm font-thin">
+          <li><a href="index.html" class="hover:text-[#C86B4A] transition-colors">Home</a></li>
+          <li><a href="classes.html" class="hover:text-[#C86B4A] transition-colors">Classes</a></li>
+          <li><a href="events.html" class="hover:text-[#C86B4A] transition-colors">Events</a></li>
+          <li><a href="private.html" class="hover:text-[#C86B4A] transition-colors">Private Sessions</a></li>
+          <li><a href="about.html" class="hover:text-[#C86B4A] transition-colors">About</a></li>
+          <li><a href="contact.html" class="hover:text-[#C86B4A] transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-4">Contact</p>
+        <ul class="space-y-2 text-sm font-thin">
+          <li><a href="mailto:Wyldspiritsyoga@gmail.com" class="hover:text-[#C86B4A] transition-colors">Wyldspiritsyoga@gmail.com</a></li>
+          <li><a href="tel:+19726001947" class="hover:text-[#C86B4A] transition-colors">(972) 600-1947</a></li>
+          <li>DFW Area, Texas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mt-12 pt-8 border-t border-[#6B4F3F]/30 text-center font-mono text-xs text-[#6B4F3F] tracking-widest uppercase">
+    © 2025 Wyld Spirits Yoga — All rights reserved
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+  lucide.createIcons();
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.gs-reveal').forEach(el => {
+    gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 85%' }, y: 40, opacity: 0, duration: 0.8, ease: 'power2.out' });
+  });
+</script>
 </body>
 </html>

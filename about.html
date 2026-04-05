@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,141 +7,216 @@
   <meta name="description" content="Wyld Spirits Yoga — the story behind the practice and the people who make it happen.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Lato:wght@100;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Sacramento&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
-    .about-hero-img {
-      width: 100%; max-height: 60vh; object-fit: cover; object-position: center top;
-      filter: saturate(0.5) brightness(0.75);
-      display: block;
-    }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-    .about-portrait {
-      aspect-ratio: 3/4; overflow: hidden; position: sticky; top: 120px;
-    }
-    .about-portrait img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: saturate(0.6) brightness(0.8);
-    }
-    @media (max-width: 900px) {
-      .about-grid { grid-template-columns: 1fr; }
-      .about-portrait { position: static; aspect-ratio: 16/9; }
-    }
+    .font-serif  { font-family: 'Playfair Display', serif; }
+    .font-script { font-family: 'Sacramento', cursive; }
+    .font-mono   { font-family: 'JetBrains Mono', monospace; }
+    body { font-family: 'Lato', sans-serif; background-color: #F5F0EA; color: #2C2018; }
+    ::-webkit-scrollbar { width: 0.5rem; }
+    ::-webkit-scrollbar-track { background: #F5F0EA; }
+    ::-webkit-scrollbar-thumb { background: #D8CFC4; border-radius: 1rem; }
+    ::-webkit-scrollbar-thumb:hover { background: #C9B08A; }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin-slow { animation: spin-slow 20s linear infinite; }
   </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden selection:bg-[#C86B4A] selection:text-[#FAF7F2]">
 
-<nav>
-  <div class="nav-logo">Wyld <span>Spirits</span> Yoga</div>
-  <div class="nav-toggle" id="navToggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
-  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="classes.html">Classes</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="private.html">Private Sessions</a></li>
-    <li><a href="about.html" class="active">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
-  </ul>
+<!-- NOISE OVERLAY -->
+<div style="position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.04;mix-blend-mode:multiply;background-image:url('data:image/svg+xml,%3Csvg viewBox%3D%220 0 200 200%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter id%3D%22n%22%3E%3CfeTurbulence type%3D%22fractalNoise%22 baseFrequency%3D%220.8%22 numOctaves%3D%223%22 stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E');"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95vw] md:w-[90vw] lg:w-[70vw] rounded-full transition-all duration-500 py-3 px-6 md:px-8 flex justify-between items-center border" style="background:rgba(44,32,24,0.85);backdrop-filter:blur(12px);border-color:rgba(201,176,138,0.2);color:#FAF7F2;">
+  <div class="flex items-center gap-3">
+    <div class="relative w-8 h-8 flex items-center justify-center text-[#E8A820]">
+      <i data-lucide="sun" class="absolute spin-slow opacity-80 w-full h-full"></i>
+      <span class="font-script text-2xl relative z-10 -rotate-12 mt-1">W</span>
+    </div>
+    <a href="index.html" class="font-serif italic tracking-tight text-xl md:text-2xl hidden md:block mt-1 text-[#FAF7F2]">Wyld Spirits Yoga</a>
+  </div>
+  <div class="hidden lg:flex items-center gap-8 text-base font-normal tracking-wide">
+    <a href="classes.html" class="hover:text-[#C86B4A] transition-colors relative group">Classes<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="events.html" class="hover:text-[#C86B4A] transition-colors relative group">Events<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="private.html" class="hover:text-[#C86B4A] transition-colors relative group">Private<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="about.html" class="text-[#C86B4A] relative group">About<span class="absolute -bottom-1 left-0 w-full h-[1px] bg-[#C86B4A]"></span></a>
+  </div>
+  <a href="contact.html" class="bg-[#C86B4A] text-[#FAF7F2] px-5 py-2.5 rounded-full text-sm md:text-base font-normal tracking-wide border border-[#C86B4A]/20 hover:bg-[#A65639] transition-colors">Book a Class</a>
 </nav>
 
-<img src="images/community1.jpg" alt="Wyld Spirits Yoga community" class="about-hero-img" style="margin-top:0;">
+<!-- PAGE HERO -->
+<header class="relative h-[60vh] w-full flex items-end justify-start pb-[8vh] px-[5vw] md:px-[10vw] overflow-hidden bg-[#2C2018]">
+  <div class="absolute inset-0 w-full h-full">
+    <img src="images/community1.jpg" alt="Wyld Spirits Yoga community" class="w-full h-full object-cover object-center opacity-60">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#2C2018] via-[#2C2018]/50 to-transparent"></div>
+  <div class="relative z-10 text-[#FAF7F2]">
+    <span class="font-mono text-sm tracking-widest text-[#C9B08A] uppercase mb-4 block">About Us</span>
+    <h1 class="font-serif italic text-5xl md:text-7xl font-normal tracking-tight leading-none">Yoga should feel<br>like belonging.</h1>
+  </div>
+</header>
 
-<div class="page-header" style="padding-top:80px;">
-  <div class="section-label">About</div>
-  <h1 class="section-title">Yoga should feel like belonging,<br>not performing.</h1>
-</div>
-
-<section class="section-pad">
-  <div class="about-grid">
-    <div class="about-portrait reveal">
-      <img src="images/about.jpg" alt="Wyld Spirits Yoga instructor">
+<!-- ABOUT STORY -->
+<section class="py-[12vh] px-[5vw] md:px-[10vw] bg-[#F5F0EA]">
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
+    <!-- Sticky Portrait -->
+    <div class="w-full lg:w-2/5 gs-reveal lg:sticky lg:top-32">
+      <div class="aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl relative">
+        <img src="images/about.jpg" alt="Wyld Spirits Yoga instructor" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0 bg-[#3F5D4A]/10 mix-blend-multiply"></div>
+      </div>
     </div>
-    <div>
-      <div class="prose">
-        <p class="lead reveal">Wyld Spirits Yoga was born out of a simple belief: that yoga belongs to everyone — not just the experienced, the flexible, or the calm.</p>
+    <!-- Story Text -->
+    <div class="w-full lg:w-3/5">
+      <span class="font-script text-4xl md:text-5xl text-[#C86B4A] mb-6 block -rotate-3 origin-left tracking-tight gs-reveal">Meet your guide</span>
+      <div class="text-[#6B4F3F] font-thin leading-relaxed space-y-6 text-lg">
+        <p class="gs-reveal font-serif italic text-xl md:text-2xl text-[#2C2018] leading-relaxed">Wyld Spirits Yoga was born out of a simple belief: that yoga belongs to everyone — not just the experienced, the flexible, or the calm.</p>
+        <p class="gs-reveal">We've all walked into a yoga class and felt out of place. Too stiff. Too new. Too busy to have shown up with anything resembling inner peace. That feeling shouldn't be part of the practice — and in our classes, it isn't.</p>
+        <p class="gs-reveal">Wyld Spirits brings accessible, grounding yoga to communities across the DFW area. Whether it's a winery patio, a CrossFit box, a school gymnasium, your company's wellness day, or your backyard, every session is designed to meet you exactly where you are.</p>
+        <blockquote class="gs-reveal border-l-2 border-[#C86B4A] pl-6 font-serif italic text-xl text-[#2C2018]">"We believe yoga isn't reserved for the flexible, the experienced, or the perfectly calm. It's for the real, the rushed, and the ready — which is all of us, most of the time."</blockquote>
 
-        <p class="reveal">We've all walked into a yoga class and felt out of place. Too stiff. Too new. Too busy to have shown up with anything resembling inner peace. That feeling shouldn't be part of the practice — and in our classes, it isn't.</p>
+        <h3 class="gs-reveal font-serif text-3xl font-normal text-[#2C2018] pt-4">Why Mobile?</h3>
+        <p class="gs-reveal">Because the best yoga is the yoga you actually show up for. Removing the barrier of getting to a studio — the commute, the parking, the unfamiliar space — means more people practice. And more people practicing means more community, more wellness, more joy.</p>
+        <p class="gs-reveal">We go to CrossFit boxes, wineries, parks, schools, offices, and living rooms. We partner with venues that want to offer their communities something meaningful. We say yes to the unusual requests, because the most memorable sessions usually start with "I have kind of a weird idea..."</p>
 
-        <p class="reveal">Wyld Spirits brings accessible, grounding yoga to communities across the DFW area. Whether it's a winery patio, a CrossFit box, a school gymnasium, your company's wellness day, or your backyard, every session is designed to meet you exactly where you are.</p>
+        <h3 class="gs-reveal font-serif text-3xl font-normal text-[#2C2018] pt-4">What to Expect From Us</h3>
+        <p class="gs-reveal">Warmth. No judgment. Clear instruction. Genuine care for where you are in your practice and your life. We're not here to perform yoga at you — we're here to practice alongside you.</p>
+        <p class="gs-reveal">And sometimes there are goats. Because joy is also part of the practice.</p>
 
-        <p class="emphasis reveal">"We believe yoga isn't reserved for the flexible, the experienced, or the perfectly calm. It's for the real, the rushed, and the ready — which is all of us, most of the time."</p>
-
-        <h3 class="reveal">Why Mobile?</h3>
-        <p class="reveal">Because the best yoga is the yoga you actually show up for. Removing the barrier of getting to a studio — the commute, the parking, the unfamiliar space — means more people practice. And more people practicing means more community, more wellness, more joy.</p>
-
-        <p class="reveal">We go to CrossFit boxes, wineries, parks, schools, offices, and living rooms. We partner with venues that want to offer their communities something meaningful. We say yes to the unusual requests, because the most memorable sessions usually start with "I have kind of a weird idea..."</p>
-
-        <h3 class="reveal">What to Expect From Us</h3>
-        <p class="reveal">Warmth. No judgment. Clear instruction. Genuine care for where you are in your practice and your life. We're not here to perform yoga at you — we're here to practice alongside you.</p>
-
-        <p class="reveal">And sometimes there are goats. Because joy is also part of the practice.</p>
-
-        <div class="reveal" style="margin-top:40px;">
-          <a href="contact.html" class="btn-primary">Practice With Us</a>
+        <div class="gs-reveal pt-4">
+          <a href="contact.html" class="inline-block bg-[#C86B4A] text-[#FAF7F2] px-8 py-4 rounded-full text-base font-normal tracking-wide hover:bg-[#A65639] transition-colors">Practice With Us</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VALUES -->
-<section class="section-pad" style="background:var(--charcoal);padding-top:80px;padding-bottom:80px;">
-  <div class="section-label reveal">What We Stand For</div>
-  <h2 class="section-title reveal" style="margin-bottom:40px;">The Wyld Spirits way</h2>
-  <div class="cards-grid">
-    <div class="card reveal">
-      <div class="card-label">Accessibility</div>
-      <div class="card-title">Yoga for every body</div>
-      <p class="card-text">Modifications offered for every pose. No experience required for any class. We meet people where they are, not where we wish they were.</p>
+<!-- VALUES / MISSION -->
+<section class="py-[15vh] px-[5vw] md:px-[10vw] bg-[#3F5D4A]">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 gs-reveal">
+      <span class="font-mono text-sm tracking-widest text-[#C9B08A] uppercase mb-4 block">What We Stand For</span>
+      <h2 class="font-serif text-4xl md:text-6xl font-normal tracking-tight text-[#FAF7F2]">The Wyld Spirits way</h2>
     </div>
-    <div class="card reveal reveal-delay-1">
-      <div class="card-label">Community</div>
-      <div class="card-title">Practice together</div>
-      <p class="card-text">Yoga is better in community. We build spaces — physical and relational — where people feel welcome from the moment they arrive.</p>
-    </div>
-    <div class="card reveal reveal-delay-2">
-      <div class="card-label">Joy</div>
-      <div class="card-title">Lightness is allowed</div>
-      <p class="card-text">The practice doesn't have to be solemn to be meaningful. We take yoga seriously without taking ourselves too seriously.</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="gs-reveal bg-[#FAF7F2]/10 border border-[#C9B08A]/20 rounded-[2rem] p-8 md:p-10 hover:bg-[#FAF7F2]/15 transition-colors">
+        <div class="w-12 h-12 bg-[#C9B08A]/20 rounded-xl flex items-center justify-center mb-6 text-[#C9B08A]">
+          <i data-lucide="accessibility" class="w-6 h-6"></i>
+        </div>
+        <div class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-2">Accessibility</div>
+        <div class="font-serif text-2xl text-[#FAF7F2] mb-4">Yoga for every body</div>
+        <p class="text-[#D8CFC4] text-base font-thin leading-relaxed">Modifications offered for every pose. No experience required for any class. We meet people where they are, not where we wish they were.</p>
+      </div>
+      <div class="gs-reveal bg-[#FAF7F2]/10 border border-[#C9B08A]/20 rounded-[2rem] p-8 md:p-10 hover:bg-[#FAF7F2]/15 transition-colors">
+        <div class="w-12 h-12 bg-[#C9B08A]/20 rounded-xl flex items-center justify-center mb-6 text-[#C9B08A]">
+          <i data-lucide="users" class="w-6 h-6"></i>
+        </div>
+        <div class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-2">Community</div>
+        <div class="font-serif text-2xl text-[#FAF7F2] mb-4">Practice together</div>
+        <p class="text-[#D8CFC4] text-base font-thin leading-relaxed">Yoga is better in community. We build spaces — physical and relational — where people feel welcome from the moment they arrive.</p>
+      </div>
+      <div class="gs-reveal bg-[#FAF7F2]/10 border border-[#C9B08A]/20 rounded-[2rem] p-8 md:p-10 hover:bg-[#FAF7F2]/15 transition-colors">
+        <div class="w-12 h-12 bg-[#C9B08A]/20 rounded-xl flex items-center justify-center mb-6 text-[#C9B08A]">
+          <i data-lucide="smile" class="w-6 h-6"></i>
+        </div>
+        <div class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-2">Joy</div>
+        <div class="font-serif text-2xl text-[#FAF7F2] mb-4">Lightness is allowed</div>
+        <p class="text-[#D8CFC4] text-base font-thin leading-relaxed">The practice doesn't have to be solemn to be meaningful. We take yoga seriously without taking ourselves too seriously.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- COMMUNITY PHOTOS -->
-<section class="section-pad">
-  <div class="section-label reveal">Community</div>
-  <h2 class="section-title reveal" style="margin-bottom:40px;">The people we practice with</h2>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
-    <div style="aspect-ratio:16/9;overflow:hidden;">
-      <img src="images/community1.jpg" alt="Wyld Spirits community" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.5) brightness(0.75);">
+<section class="py-[12vh] px-[5vw] md:px-[10vw] bg-[#F5F0EA]">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-10 gs-reveal">
+      <span class="font-mono text-sm tracking-widest text-[#C86B4A] uppercase mb-4 block">Community</span>
+      <h2 class="font-serif text-4xl md:text-5xl font-normal tracking-tight text-[#2C2018]">The people we practice with</h2>
     </div>
-    <div style="aspect-ratio:16/9;overflow:hidden;">
-      <img src="images/community2.jpg" alt="Wyld Spirits community" style="width:100%;height:100%;object-fit:cover;filter:saturate(0.5) brightness(0.75);">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div class="aspect-[16/9] rounded-[2rem] overflow-hidden gs-reveal">
+        <img src="images/community1.jpg" alt="Wyld Spirits community" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+      </div>
+      <div class="aspect-[16/9] rounded-[2rem] overflow-hidden gs-reveal">
+        <img src="images/community2.jpg" alt="Wyld Spirits community" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+      </div>
     </div>
   </div>
 </section>
 
-<div class="cta-banner">
-  <h2 class="section-title reveal">Come practice with us.</h2>
-  <p class="section-sub reveal" style="text-align:center;margin:0 auto 32px;">Drop into a class, book a private session, or just reach out to say hello.</p>
-  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;" class="reveal">
-    <a href="classes.html" class="btn-primary">View Classes</a>
-    <a href="contact.html" class="btn-outline">Get In Touch</a>
+<!-- STATS -->
+<section class="py-[8vh] px-[5vw] md:px-[10vw] bg-[#FAF7F2] border-t border-[#D8CFC4]/50">
+  <div class="max-w-4xl mx-auto flex flex-wrap justify-center gap-x-16 gap-y-8 text-center gs-reveal">
+    <div>
+      <div class="font-serif text-5xl md:text-6xl font-normal text-[#C86B4A] mb-2">3+</div>
+      <div class="font-mono text-xs tracking-widest text-[#6B4F3F] uppercase">Partner Studios</div>
+    </div>
+    <div>
+      <div class="font-serif text-5xl md:text-6xl font-normal text-[#C86B4A] mb-2">50+</div>
+      <div class="font-mono text-xs tracking-widest text-[#6B4F3F] uppercase">Events Hosted</div>
+    </div>
+    <div>
+      <div class="font-serif text-5xl md:text-6xl font-normal text-[#C86B4A] mb-2">DFW</div>
+      <div class="font-mono text-xs tracking-widest text-[#6B4F3F] uppercase">Communities Served</div>
+    </div>
   </div>
-</div>
+</section>
 
-<footer>
-  <div class="footer-left">© 2026 Wyld Spirits Yoga · DFW, Texas</div>
-  <div class="footer-links">
-    <a href="mailto:Wyldspiritsyoga@gmail.com">Email</a>
-    <a href="tel:+19726001947">Call</a>
-    <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank">Instagram</a>
-    <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank">Facebook</a>
+<!-- CTA -->
+<section class="py-[10vh] px-[5vw] md:px-[10vw] bg-[#F5F0EA] text-center border-t border-[#D8CFC4]/30">
+  <h2 class="gs-reveal font-serif text-4xl md:text-6xl font-normal tracking-tight text-[#2C2018] mb-6">Come practice with us.</h2>
+  <p class="gs-reveal text-[#6B4F3F] font-thin text-lg mb-10 max-w-md mx-auto">Drop into a class, book a private session, or just reach out to say hello.</p>
+  <div class="gs-reveal flex justify-center gap-4 flex-wrap">
+    <a href="classes.html" class="inline-block bg-[#3F5D4A] text-[#FAF7F2] px-8 py-4 rounded-full text-base font-normal tracking-wide hover:bg-[#2A3F32] transition-colors">View Classes</a>
+    <a href="contact.html" class="inline-block border border-[#6B4F3F]/40 text-[#2C2018] px-8 py-4 rounded-full text-base font-normal tracking-wide hover:bg-[#D8CFC4] transition-colors">Get In Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#2C2018] text-[#D8CFC4] py-16 px-[5vw] md:px-[10vw]">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+    <div>
+      <span class="font-serif italic text-2xl text-[#FAF7F2] block mb-3">Wyld Spirits Yoga</span>
+      <p class="font-thin text-sm text-[#D8CFC4]/70 max-w-xs">Untamed movement, grounded spirit. DFW area yoga for every body.</p>
+    </div>
+    <div class="flex flex-wrap gap-12">
+      <div>
+        <p class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-4">Pages</p>
+        <ul class="space-y-2 text-sm font-thin">
+          <li><a href="index.html" class="hover:text-[#C86B4A] transition-colors">Home</a></li>
+          <li><a href="classes.html" class="hover:text-[#C86B4A] transition-colors">Classes</a></li>
+          <li><a href="events.html" class="hover:text-[#C86B4A] transition-colors">Events</a></li>
+          <li><a href="private.html" class="hover:text-[#C86B4A] transition-colors">Private Sessions</a></li>
+          <li><a href="about.html" class="hover:text-[#C86B4A] transition-colors">About</a></li>
+          <li><a href="contact.html" class="hover:text-[#C86B4A] transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-4">Contact</p>
+        <ul class="space-y-2 text-sm font-thin">
+          <li><a href="mailto:Wyldspiritsyoga@gmail.com" class="hover:text-[#C86B4A] transition-colors">Wyldspiritsyoga@gmail.com</a></li>
+          <li><a href="tel:+19726001947" class="hover:text-[#C86B4A] transition-colors">(972) 600-1947</a></li>
+          <li>DFW Area, Texas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mt-12 pt-8 border-t border-[#6B4F3F]/30 text-center font-mono text-xs text-[#6B4F3F] tracking-widest uppercase">
+    © 2025 Wyld Spirits Yoga — All rights reserved
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+  lucide.createIcons();
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.gs-reveal').forEach(el => {
+    gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 85%' }, y: 40, opacity: 0, duration: 0.8, ease: 'power2.out' });
+  });
+</script>
 </body>
 </html>

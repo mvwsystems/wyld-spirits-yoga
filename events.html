@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,171 +7,191 @@
   <meta name="description" content="Upcoming yoga events across DFW — winery sessions, goat yoga, community pop-ups, and more.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Lato:wght@100;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Sacramento&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
-    .event-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; margin-top: 48px; }
-    .event-card {
-      background: var(--charcoal); border: 1px solid var(--stone);
-      overflow: hidden; transition: all 0.5s var(--ease-expo); position: relative;
-    }
-    .event-card:hover { border-color: var(--stone-mid); transform: translateY(-4px); }
-    .event-card-img {
-      height: 220px; overflow: hidden;
-    }
-    .event-card-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: saturate(0.5) brightness(0.75);
-      transition: filter 0.5s, transform 0.6s var(--ease-expo);
-    }
-    .event-card:hover .event-card-img img { filter: saturate(0.8) brightness(0.9); transform: scale(1.05); }
-    .event-card-body { padding: 32px; }
-    .event-date {
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px;
-      color: var(--sage); margin-bottom: 12px; text-transform: uppercase;
-    }
-    .event-name {
-      font-family: var(--font-display); font-size: 24px; color: var(--white);
-      margin-bottom: 10px; line-height: 1.2;
-    }
-    .event-meta {
-      font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
-      color: var(--muted); margin-bottom: 16px; text-transform: uppercase;
-    }
-    .event-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
-    .event-tag {
-      display: inline-block; font-family: var(--font-mono); font-size: 9px;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--sage);
-      border: 1px solid var(--stone); padding: 4px 10px; margin-right: 6px; margin-bottom: 16px;
-    }
-    @media (max-width: 600px) { .event-grid { grid-template-columns: 1fr; } }
+    .font-serif  { font-family: 'Playfair Display', serif; }
+    .font-script { font-family: 'Sacramento', cursive; }
+    .font-mono   { font-family: 'JetBrains Mono', monospace; }
+    body { font-family: 'Lato', sans-serif; background-color: #F5F0EA; color: #2C2018; }
+    ::-webkit-scrollbar { width: 0.5rem; }
+    ::-webkit-scrollbar-track { background: #F5F0EA; }
+    ::-webkit-scrollbar-thumb { background: #D8CFC4; border-radius: 1rem; }
+    ::-webkit-scrollbar-thumb:hover { background: #C9B08A; }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .spin-slow { animation: spin-slow 20s linear infinite; }
   </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden selection:bg-[#C86B4A] selection:text-[#FAF7F2]">
 
-<nav>
-  <div class="nav-logo">Wyld <span>Spirits</span> Yoga</div>
-  <div class="nav-toggle" id="navToggle" onclick="toggleNav()"><span></span><span></span><span></span></div>
-  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="classes.html">Classes</a></li>
-    <li><a href="events.html" class="active">Events</a></li>
-    <li><a href="private.html">Private Sessions</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="contact.html" class="nav-cta">Book a Session</a></li>
-  </ul>
+<!-- NOISE OVERLAY -->
+<div style="position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.04;mix-blend-mode:multiply;background-image:url('data:image/svg+xml,%3Csvg viewBox%3D%220 0 200 200%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter id%3D%22n%22%3E%3CfeTurbulence type%3D%22fractalNoise%22 baseFrequency%3D%220.8%22 numOctaves%3D%223%22 stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E');"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95vw] md:w-[90vw] lg:w-[70vw] rounded-full transition-all duration-500 py-3 px-6 md:px-8 flex justify-between items-center border" style="background:rgba(44,32,24,0.85);backdrop-filter:blur(12px);border-color:rgba(201,176,138,0.2);color:#FAF7F2;">
+  <div class="flex items-center gap-3">
+    <div class="relative w-8 h-8 flex items-center justify-center text-[#E8A820]">
+      <i data-lucide="sun" class="absolute spin-slow opacity-80 w-full h-full"></i>
+      <span class="font-script text-2xl relative z-10 -rotate-12 mt-1">W</span>
+    </div>
+    <a href="index.html" class="font-serif italic tracking-tight text-xl md:text-2xl hidden md:block mt-1 text-[#FAF7F2]">Wyld Spirits Yoga</a>
+  </div>
+  <div class="hidden lg:flex items-center gap-8 text-base font-normal tracking-wide">
+    <a href="classes.html" class="hover:text-[#C86B4A] transition-colors relative group">Classes<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="events.html" class="text-[#C86B4A] relative group">Events<span class="absolute -bottom-1 left-0 w-full h-[1px] bg-[#C86B4A]"></span></a>
+    <a href="private.html" class="hover:text-[#C86B4A] transition-colors relative group">Private<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+    <a href="about.html" class="hover:text-[#C86B4A] transition-colors relative group">About<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
+  </div>
+  <a href="contact.html" class="bg-[#C86B4A] text-[#FAF7F2] px-5 py-2.5 rounded-full text-sm md:text-base font-normal tracking-wide border border-[#C86B4A]/20 hover:bg-[#A65639] transition-colors">Book a Class</a>
 </nav>
 
-<div class="page-header">
-  <div class="section-label">Events</div>
-  <h1 class="section-title">Yoga beyond the studio.</h1>
-  <p class="section-sub">Pop-ups, winery sessions, goat yoga, and community gatherings across DFW. These are the events people talk about long after they leave.</p>
-</div>
+<!-- PAGE HERO -->
+<header class="relative h-[60vh] w-full flex items-end justify-start pb-[8vh] px-[5vw] md:px-[10vw] overflow-hidden bg-[#2C2018]">
+  <div class="absolute inset-0 w-full h-full">
+    <img src="images/outdoor.jpg" alt="Outdoor yoga event" class="w-full h-full object-cover object-center opacity-60">
+  </div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#2C2018] via-[#2C2018]/50 to-transparent"></div>
+  <div class="relative z-10 text-[#FAF7F2]">
+    <span class="font-mono text-sm tracking-widest text-[#C9B08A] uppercase mb-4 block">Events &amp; Gatherings</span>
+    <h1 class="font-serif italic text-5xl md:text-7xl font-normal tracking-tight leading-none">Yoga beyond<br>the studio.</h1>
+  </div>
+</header>
 
-<!-- UPCOMING -->
-<section class="section-pad">
-  <div class="section-label reveal">Upcoming</div>
-  <h2 class="section-title reveal">What's on the calendar</h2>
-  <div class="event-grid">
-    <div class="event-card reveal">
-      <div class="event-card-img">
-        <img src="images/hero.jpg" alt="Winery yoga event">
+<!-- UPCOMING EVENTS -->
+<section class="py-[12vh] px-[5vw] md:px-[10vw] bg-[#FAF7F2]">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 gs-reveal">
+      <div>
+        <span class="font-mono text-sm tracking-widest text-[#C86B4A] uppercase mb-4 block">Upcoming</span>
+        <h2 class="font-serif text-4xl md:text-6xl font-normal tracking-tight text-[#2C2018]">Upcoming Gatherings</h2>
+        <p class="text-[#6B4F3F] text-lg font-thin mt-3">Pop-ups, winery sessions, goat yoga, and community events across DFW.</p>
       </div>
-      <div class="event-card-body">
-        <div class="event-date">Coming Soon — 2026</div>
-        <div class="event-name">Yoga at Sugar Ridge Winery</div>
-        <div class="event-meta">Sugar Ridge Winery · Midlothian, TX</div>
-        <span class="event-tag">Winery</span>
-        <span class="event-tag">Community</span>
-        <p class="event-desc">A special afternoon session at Sugar Ridge Winery — movement, breath, and community in a beautiful setting. Tickets include class access and time to enjoy the grounds.</p>
-        <a href="mailto:Wyldspiritsyoga@gmail.com" class="btn-outline">Get Tickets</a>
-      </div>
+      <a href="contact.html" class="font-mono text-sm tracking-widest text-[#3F5D4A] uppercase hover:text-[#C86B4A] transition-colors flex items-center gap-2 whitespace-nowrap">Stay Updated <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
     </div>
-    <div class="event-card reveal reveal-delay-1">
-      <div class="event-card-img">
-        <img src="images/goat.jpg" alt="Goat yoga">
-      </div>
-      <div class="event-card-body">
-        <div class="event-date">Coming Soon</div>
-        <div class="event-name">Goat Yoga</div>
-        <div class="event-meta">Location TBD · DFW Area</div>
-        <span class="event-tag">Goat Yoga</span>
-        <span class="event-tag">Family Friendly</span>
-        <p class="event-desc">You've heard about it. Now come experience it. Yoga with goats is exactly as fun as it sounds — and somehow also deeply calming.</p>
-        <a href="mailto:Wyldspiritsyoga@gmail.com" class="btn-outline">Stay Updated</a>
-      </div>
-    </div>
-    <div class="event-card reveal reveal-delay-2">
-      <div class="event-card-img">
-        <img src="images/outdoor.jpg" alt="Outdoor yoga">
-      </div>
-      <div class="event-card-body">
-        <div class="event-date">New Midlothian Office — Soon</div>
-        <div class="event-name">Workshops &amp; More</div>
-        <div class="event-meta">Midlothian, TX</div>
-        <span class="event-tag">Workshop</span>
-        <span class="event-tag">Indoor</span>
-        <p class="event-desc">New workshops and events are in the works at our new Midlothian office space. Stay tuned for announcements on themes, dates, and how to sign up.</p>
-        <a href="mailto:Wyldspiritsyoga@gmail.com" class="btn-outline">Stay Updated</a>
-      </div>
-    </div>
-    <div class="event-card reveal">
-      <div class="event-card-img" style="display:flex;align-items:center;justify-content:center;background:var(--stone);">
-        <div style="text-align:center;padding:40px;">
-          <div style="font-family:var(--font-display);font-size:48px;color:var(--ash);margin-bottom:8px;">+</div>
-          <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:3px;color:var(--ash);">More Coming</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <!-- Featured Event -->
+      <div class="gs-reveal bg-[#C9B08A]/20 border border-[#C9B08A]/50 rounded-[2rem] overflow-hidden flex flex-col hover:-translate-y-1 transition-transform duration-500">
+        <div class="h-56 overflow-hidden">
+          <img src="images/hero.jpg" alt="Winery yoga event" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8 md:p-10 flex flex-col flex-1">
+          <div class="font-mono text-sm md:text-base text-[#C86B4A] bg-[#C86B4A]/10 self-start px-3 py-1 rounded-full mb-6">Coming Soon · 2026</div>
+          <h3 class="font-serif text-3xl md:text-4xl font-normal tracking-tight text-[#2C2018] mb-4">Sugar Ridge Winery Yoga</h3>
+          <p class="text-[#6B4F3F] text-base md:text-lg font-thin leading-relaxed mb-8 flex-1">Flow among the vines. A grounded practice followed by community connection. Tickets available through Sugar Ridge Winery.</p>
+          <a href="mailto:Wyldspiritsyoga@gmail.com" class="group relative overflow-hidden w-full text-center bg-[#3F5D4A] text-[#FAF7F2] px-6 py-3.5 rounded-xl text-base font-normal tracking-wide hover:bg-[#2A3F32] transition-colors">Get Tickets</a>
         </div>
       </div>
-      <div class="event-card-body">
-        <div class="event-date">Stay Connected</div>
-        <div class="event-name">Don't Miss the Next Event</div>
-        <div class="event-meta">All DFW Locations</div>
-        <p class="event-desc">Sign up for our email list to be the first to know when new events drop. We announce things fast and sell out faster.</p>
-        <a href="contact.html" class="btn-outline">Join the List</a>
+
+      <!-- Goat Yoga -->
+      <div class="gs-reveal bg-[#FAF7F2] border border-[#C9B08A]/30 rounded-[2rem] overflow-hidden flex flex-col hover:-translate-y-1 transition-transform duration-500 shadow-sm hover:shadow-md">
+        <div class="h-56 overflow-hidden">
+          <img src="images/goat.jpg" alt="Goat yoga" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8 md:p-10 flex flex-col flex-1">
+          <div class="font-mono text-sm text-[#C86B4A] bg-[#C86B4A]/10 self-start px-3 py-1 rounded-full mb-6">Coming Soon</div>
+          <h3 class="font-serif text-3xl font-normal tracking-tight text-[#2C2018] mb-4">Goat Yoga</h3>
+          <p class="text-[#6B4F3F] text-base md:text-lg font-thin leading-relaxed mb-8 flex-1">You've heard about it. Now come experience it. Yoga with goats is exactly as fun as it sounds — and somehow also deeply calming.</p>
+          <a href="mailto:Wyldspiritsyoga@gmail.com" class="w-full text-center border border-[#6B4F3F]/30 text-[#2C2018] px-6 py-3 rounded-xl text-base font-normal hover:bg-[#D8CFC4] transition-colors">Stay Updated</a>
+        </div>
+      </div>
+
+      <!-- Workshops -->
+      <div class="gs-reveal bg-[#FAF7F2] border border-[#C9B08A]/30 rounded-[2rem] overflow-hidden flex flex-col hover:-translate-y-1 transition-transform duration-500 shadow-sm hover:shadow-md">
+        <div class="h-56 overflow-hidden">
+          <img src="images/school.jpg" alt="Indoor yoga workshop" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+        </div>
+        <div class="p-8 md:p-10 flex flex-col flex-1">
+          <div class="font-mono text-sm text-[#C86B4A] bg-[#C86B4A]/10 self-start px-3 py-1 rounded-full mb-6">New Midlothian Space</div>
+          <h3 class="font-serif text-3xl font-normal tracking-tight text-[#2C2018] mb-4">Workshops &amp; More</h3>
+          <p class="text-[#6B4F3F] text-base md:text-lg font-thin leading-relaxed mb-8 flex-1">New workshops and events are in the works at our Midlothian office space. Stay tuned for announcements on themes, dates, and how to sign up.</p>
+          <a href="mailto:Wyldspiritsyoga@gmail.com" class="w-full text-center border border-[#6B4F3F]/30 text-[#2C2018] px-6 py-3 rounded-xl text-base font-normal hover:bg-[#D8CFC4] transition-colors">Stay Updated</a>
+        </div>
+      </div>
+
+      <!-- More Coming -->
+      <div class="gs-reveal bg-[#F5F0EA] border-2 border-dashed border-[#D8CFC4] rounded-[2rem] p-10 flex flex-col justify-center items-center text-center hover:-translate-y-1 transition-transform duration-500">
+        <div class="w-14 h-14 rounded-full bg-[#D8CFC4]/50 flex items-center justify-center mb-6 text-[#6B4F3F]">
+          <i data-lucide="star" class="w-7 h-7"></i>
+        </div>
+        <h3 class="font-serif text-2xl md:text-3xl font-normal tracking-tight text-[#2C2018] mb-4">More events brewing</h3>
+        <p class="text-[#6B4F3F] text-base md:text-lg font-thin leading-relaxed mb-8 max-w-xs">Sign up for our email list to be the first to know when new events drop. We announce fast and sell out faster.</p>
+        <a href="contact.html" class="font-mono text-sm tracking-widest text-[#C86B4A] uppercase hover:text-[#2C2018] transition-colors flex items-center gap-2">Join the List <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- HOST AN EVENT -->
-<section class="section-pad" style="background:var(--charcoal);padding-top:80px;padding-bottom:80px;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
-    <div>
-      <div class="section-label reveal">Bring Us to You</div>
-      <h2 class="section-title reveal">Host a Wyld Spirits event</h2>
-      <div class="prose reveal">
+<section class="py-[12vh] px-[5vw] md:px-[10vw] bg-[#3F5D4A] rounded-[3rem] mx-4 md:mx-8 mb-8">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="gs-reveal">
+      <span class="font-mono text-sm tracking-widest text-[#C9B08A] uppercase mb-4 block">Bring Us to You</span>
+      <h2 class="font-serif text-4xl md:text-5xl font-normal tracking-tight text-[#FAF7F2] mb-8 leading-[1.2]">Host a Wyld Spirits event</h2>
+      <div class="text-[#D8CFC4] font-thin leading-relaxed space-y-5 text-lg mb-10">
         <p>We partner with wineries, breweries, parks, corporate campuses, and private venues to bring yoga experiences that people actually want to attend.</p>
         <p>If you have a space and a community, we'll bring the practice. Let's talk.</p>
       </div>
-      <a href="contact.html" class="btn-primary reveal" style="margin-top:32px;">Inquire About Hosting</a>
+      <a href="contact.html" class="inline-block bg-[#C86B4A] text-[#FAF7F2] px-8 py-4 rounded-full text-base font-normal tracking-wide hover:bg-[#A65639] transition-colors">Inquire About Hosting</a>
     </div>
-    <div class="cards-grid" style="grid-template-columns:1fr;margin-top:0;">
-      <div class="card reveal">
-        <div class="card-label">Wineries &amp; Breweries</div>
-        <div class="card-title">Perfect for your venue</div>
-        <p class="card-text">Yoga + your space = a memorable experience your customers will come back for. We handle everything.</p>
+    <div class="flex flex-col gap-4">
+      <div class="gs-reveal bg-[#FAF7F2]/10 border border-[#C9B08A]/20 rounded-[2rem] p-8 hover:bg-[#FAF7F2]/15 transition-colors">
+        <div class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-2">Wineries &amp; Breweries</div>
+        <div class="font-serif text-2xl text-[#FAF7F2] mb-3">Perfect for your venue</div>
+        <p class="text-[#D8CFC4] text-sm font-thin leading-relaxed">Yoga + your space = a memorable experience your customers will come back for. We handle everything.</p>
       </div>
-      <div class="card reveal reveal-delay-1">
-        <div class="card-label">Corporate &amp; Private</div>
-        <div class="card-title">Bring it to your team</div>
-        <p class="card-text">Wellness days, retreats, team events — we customize the experience to your group size and goals.</p>
+      <div class="gs-reveal bg-[#FAF7F2]/10 border border-[#C9B08A]/20 rounded-[2rem] p-8 hover:bg-[#FAF7F2]/15 transition-colors">
+        <div class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-2">Corporate &amp; Private</div>
+        <div class="font-serif text-2xl text-[#FAF7F2] mb-3">Bring it to your team</div>
+        <p class="text-[#D8CFC4] text-sm font-thin leading-relaxed">Wellness days, retreats, team events — we customize the experience to your group size and goals.</p>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="footer-left">© 2026 Wyld Spirits Yoga · DFW, Texas</div>
-  <div class="footer-links">
-    <a href="mailto:Wyldspiritsyoga@gmail.com">Email</a>
-    <a href="tel:+19726001947">Call</a>
-    <a href="https://www.instagram.com/wyldspiritsyoga" target="_blank">Instagram</a>
-    <a href="https://www.facebook.com/wyldspiritsyoga" target="_blank">Facebook</a>
+<!-- FOOTER -->
+<footer class="bg-[#2C2018] text-[#D8CFC4] py-16 px-[5vw] md:px-[10vw]">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+    <div>
+      <span class="font-serif italic text-2xl text-[#FAF7F2] block mb-3">Wyld Spirits Yoga</span>
+      <p class="font-thin text-sm text-[#D8CFC4]/70 max-w-xs">Untamed movement, grounded spirit. DFW area yoga for every body.</p>
+    </div>
+    <div class="flex flex-wrap gap-12">
+      <div>
+        <p class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-4">Pages</p>
+        <ul class="space-y-2 text-sm font-thin">
+          <li><a href="index.html" class="hover:text-[#C86B4A] transition-colors">Home</a></li>
+          <li><a href="classes.html" class="hover:text-[#C86B4A] transition-colors">Classes</a></li>
+          <li><a href="events.html" class="hover:text-[#C86B4A] transition-colors">Events</a></li>
+          <li><a href="private.html" class="hover:text-[#C86B4A] transition-colors">Private Sessions</a></li>
+          <li><a href="about.html" class="hover:text-[#C86B4A] transition-colors">About</a></li>
+          <li><a href="contact.html" class="hover:text-[#C86B4A] transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-[#C9B08A] uppercase mb-4">Contact</p>
+        <ul class="space-y-2 text-sm font-thin">
+          <li><a href="mailto:Wyldspiritsyoga@gmail.com" class="hover:text-[#C86B4A] transition-colors">Wyldspiritsyoga@gmail.com</a></li>
+          <li><a href="tel:+19726001947" class="hover:text-[#C86B4A] transition-colors">(972) 600-1947</a></li>
+          <li>DFW Area, Texas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mt-12 pt-8 border-t border-[#6B4F3F]/30 text-center font-mono text-xs text-[#6B4F3F] tracking-widest uppercase">
+    © 2025 Wyld Spirits Yoga — All rights reserved
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+  lucide.createIcons();
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.gs-reveal').forEach(el => {
+    gsap.from(el, { scrollTrigger: { trigger: el, start: 'top 85%' }, y: 40, opacity: 0, duration: 0.8, ease: 'power2.out' });
+  });
+</script>
 </body>
 </html>
