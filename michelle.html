@@ -107,6 +107,53 @@
     .urgency-strip {
       background: linear-gradient(90deg, #2C2018 0%, #3D2B1F 50%, #2C2018 100%);
     }
+
+    .cashapp-btn {
+      background: linear-gradient(135deg, #00C244 0%, #00A337 100%);
+      box-shadow: 0 8px 32px rgba(0, 194, 68, 0.25);
+      transition: all 0.3s ease;
+      color: #fff;
+    }
+    .cashapp-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0, 194, 68, 0.35);
+    }
+    .cashapp-btn:active { transform: translateY(-1px); }
+
+    .pay-selector {
+      display: inline-flex;
+      background: rgba(255,255,255,0.1);
+      border-radius: 9999px;
+      padding: 4px;
+      gap: 2px;
+    }
+    .pay-selector.light {
+      background: rgba(44,32,24,0.08);
+    }
+    .pay-opt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 22px;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      color: rgba(255,255,255,0.45);
+      background: transparent;
+    }
+    .pay-selector.light .pay-opt {
+      color: rgba(44,32,24,0.4);
+    }
+    .pay-opt.active[data-platform="venmo"] {
+      background: #C96B85;
+      color: #FAF7F2;
+    }
+    .pay-opt.active[data-platform="cashapp"] {
+      background: #00C244;
+      color: #fff;
+    }
   </style>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-[#C96B85] selection:text-[#FAF7F2]">
@@ -179,16 +226,18 @@
     <p class="hero-elem font-serif italic text-[#D8CFC4] text-xl md:text-3xl tracking-wide mb-10 md:mb-14" style="font-weight:400;">A Community Flow of Love, Hope &amp; Healing</p>
 
     <!-- CTA Block -->
-    <div class="hero-elem flex flex-col sm:flex-row items-center gap-4 md:gap-6">
-      <a href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
-         class="venmo-btn text-[#FAF7F2] px-8 md:px-12 py-4 md:py-5 rounded-full text-base md:text-lg font-normal tracking-wide flex items-center gap-3 relative">
+    <div class="hero-elem flex flex-col items-center gap-5">
+      <div class="pay-selector" data-target="hero-cta">
+        <button class="pay-opt active" data-platform="venmo" data-href="https://venmo.com/u/Michelle-Weirman">Venmo</button>
+        <button class="pay-opt" data-platform="cashapp" data-href="https://cash.app/$MichelleWeirman">Cash App</button>
+      </div>
+      <a id="hero-cta" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
+         class="venmo-btn text-[#FAF7F2] px-8 md:px-12 py-4 md:py-5 rounded-full text-base md:text-lg font-normal tracking-wide flex items-center gap-3">
         <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
         <span>Secure My Spot — $35</span>
         <i data-lucide="arrow-right" class="w-5 h-5"></i>
       </a>
-      <div class="text-center sm:text-left">
-        <p class="font-mono text-xs text-[#D8CFC4]/60 uppercase tracking-widest">via venmo · all proceeds to michelle</p>
-      </div>
+      <p class="font-mono text-xs text-[#D8CFC4]/60 uppercase tracking-widest">all proceeds go directly to michelle</p>
     </div>
 
     <!-- Spots indicator -->
@@ -247,11 +296,16 @@
       <p>Together, we flow. Together, we heal. Together, we lift her up.</p>
     </div>
 
-    <div class="gs-reveal mt-16">
+    <div class="gs-reveal mt-16 flex flex-col sm:flex-row gap-4">
       <a href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
-         class="venmo-btn text-[#FAF7F2] px-8 py-4 rounded-full text-base font-normal tracking-wide inline-flex items-center gap-3">
+         class="venmo-btn text-[#FAF7F2] px-8 py-4 rounded-full text-base font-normal tracking-wide inline-flex items-center justify-center gap-3">
         <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
-        <span>I'm In — Secure My $35 Spot</span>
+        <span>Pay via Venmo — $35</span>
+      </a>
+      <a href="https://cash.app/$MichelleWeirman" target="_blank" rel="noopener"
+         class="cashapp-btn px-8 py-4 rounded-full text-base font-normal tracking-wide inline-flex items-center justify-center gap-3">
+        <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
+        <span>Pay via Cash App — $35</span>
       </a>
     </div>
   </div>
@@ -359,14 +413,20 @@
         <li class="flex items-center gap-3 font-light"><span style="color:#C96B85;">✦</span> 100% of your $35 goes straight to Michelle</li>
       </ul>
 
-      <a href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
+      <div class="flex justify-center mb-4">
+        <div class="pay-selector light" data-target="price-cta">
+          <button class="pay-opt active" data-platform="venmo" data-href="https://venmo.com/u/Michelle-Weirman">Venmo</button>
+          <button class="pay-opt" data-platform="cashapp" data-href="https://cash.app/$MichelleWeirman">Cash App</button>
+        </div>
+      </div>
+      <a id="price-cta" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
          class="venmo-btn w-full text-[#FAF7F2] px-8 py-5 rounded-2xl text-lg md:text-xl font-normal tracking-wide flex items-center justify-center gap-3">
         <i data-lucide="heart" class="w-6 h-6 fill-current"></i>
-        <span>Pay $35 on Venmo — I'm In</span>
+        <span>Pay $35 — I'm In</span>
         <i data-lucide="external-link" class="w-5 h-5"></i>
       </a>
 
-      <p class="text-[#3D2B1F]/50 text-sm font-mono tracking-wide mt-4">Pay <strong class="font-normal">@Michelle-Weirman</strong> on Venmo · Add "Yoga for Michelle" in the note</p>
+      <p id="price-note" class="text-[#3D2B1F]/50 text-sm font-mono tracking-wide mt-4">Pay <strong class="font-normal">@Michelle-Weirman</strong> on Venmo · Add "Yoga for Michelle" in the note</p>
     </div>
 
     <!-- Urgency note -->
@@ -384,14 +444,22 @@
       <h2 class="font-serif text-3xl md:text-5xl font-normal tracking-tight text-[#2C2018] mb-6">Your support still matters — <em>no mat required.</em></h2>
       <p class="text-[#3D2B1F] text-lg font-light leading-relaxed mb-10">If June 27th doesn't work for you, please don't let that stop you from being part of this. A donation of any size — $5, $10, $25, whatever feels right — lands directly in Michelle's hands. Every bit helps. No donation is too small.</p>
 
-      <a href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
-         class="donate-btn inline-flex items-center gap-3 px-8 py-4 rounded-full text-base font-normal tracking-wide">
-        <i data-lucide="heart" class="w-5 h-5"></i>
-        <span>Donate Any Amount via Venmo</span>
-        <i data-lucide="external-link" class="w-5 h-5"></i>
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
+           class="donate-btn inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-base font-normal tracking-wide">
+          <i data-lucide="heart" class="w-5 h-5"></i>
+          <span>Donate via Venmo</span>
+          <i data-lucide="external-link" class="w-5 h-5"></i>
+        </a>
+        <a href="https://cash.app/$MichelleWeirman" target="_blank" rel="noopener"
+           class="cashapp-btn inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-base font-normal tracking-wide">
+          <i data-lucide="heart" class="w-5 h-5"></i>
+          <span>Donate via Cash App</span>
+          <i data-lucide="external-link" class="w-5 h-5"></i>
+        </a>
+      </div>
 
-      <p class="font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/40 mt-5">@Michelle-Weirman · add "For Michelle" in your note</p>
+      <p class="font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/40 mt-5">Add "For Michelle" in your note</p>
     </div>
   </div>
 </section>
@@ -405,16 +473,21 @@
       <p class="font-sans font-light text-[#D8CFC4] text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4">Let's show Michelle that she is surrounded by love. Not just in words. Not just in thoughts and prayers. But in presence — on a mat, in a room, breathing together.</p>
       <p class="font-serif italic text-[#FAF7F2] text-2xl md:text-3xl mb-12">Together, we flow. Together, we heal.</p>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
         <a href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
            class="venmo-btn text-[#FAF7F2] px-10 py-5 rounded-full text-lg font-normal tracking-wide flex items-center gap-3">
           <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
-          <span>Secure My Spot — $35</span>
+          <span>Pay via Venmo — $35</span>
         </a>
-        <div class="flex flex-col items-center gap-1">
-          <p class="font-mono text-xs text-[#D8CFC4]/50 uppercase tracking-widest">Hosted by</p>
-          <p class="font-serif italic text-xl text-[#FAF7F2]">Wyld Spirits Yoga</p>
-        </div>
+        <a href="https://cash.app/$MichelleWeirman" target="_blank" rel="noopener"
+           class="cashapp-btn px-10 py-5 rounded-full text-lg font-normal tracking-wide flex items-center gap-3">
+          <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
+          <span>Pay via Cash App — $35</span>
+        </a>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <p class="font-mono text-xs text-[#D8CFC4]/50 uppercase tracking-widest">Hosted by</p>
+        <p class="font-serif italic text-xl text-[#FAF7F2]">Wyld Spirits Yoga</p>
       </div>
     </div>
   </div>
@@ -479,6 +552,33 @@
 
   gsap.registerPlugin(ScrollTrigger);
   gsap.from('.hero-elem', { y: 60, opacity: 0, duration: 1.2, stagger: 0.12, ease: 'power3.out', delay: 0.3 });
+
+  document.querySelectorAll('.pay-selector').forEach(selector => {
+    const targetId = selector.dataset.target;
+    const cta = document.getElementById(targetId);
+    selector.querySelectorAll('.pay-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selector.querySelectorAll('.pay-opt').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const platform = btn.dataset.platform;
+        const href = btn.dataset.href;
+        if (cta) {
+          cta.href = href;
+          cta.classList.toggle('venmo-btn', platform === 'venmo');
+          cta.classList.toggle('cashapp-btn', platform === 'cashapp');
+          if (platform === 'cashapp') cta.style.color = '#fff';
+        }
+        if (targetId === 'price-cta') {
+          const note = document.getElementById('price-note');
+          if (note) {
+            note.innerHTML = platform === 'cashapp'
+              ? 'Send to <strong class="font-normal">$MichelleWeirman</strong> on Cash App · Add "Yoga for Michelle" in the note'
+              : 'Pay <strong class="font-normal">@Michelle-Weirman</strong> on Venmo · Add "Yoga for Michelle" in the note';
+          }
+        }
+      });
+    });
+  });
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
