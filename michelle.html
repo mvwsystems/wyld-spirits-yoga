@@ -156,7 +156,7 @@
       padding: 4px;
       gap: 2px;
     }
-    .pay-selector.light { background: rgba(44,32,24,0.08); }
+    .pay-selector.light { background: rgba(44,32,24,0.08); border: 1px solid rgba(44,32,24,0.1); }
     .pay-opt {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
@@ -167,10 +167,10 @@
       border: none;
       cursor: pointer;
       transition: all 0.25s ease;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.55);
       background: transparent;
     }
-    .pay-selector.light .pay-opt { color: rgba(44,32,24,0.4); }
+    .pay-selector.light .pay-opt { color: rgba(44,32,24,0.55); }
     .pay-opt.active[data-platform="venmo"]   { background: #C96B85; color: #FAF7F2; }
     .pay-opt.active[data-platform="cashapp"] { background: #00C244; color: #fff; }
     .pay-opt.active[data-platform="zelle"]   { background: #6E1AF0; color: #fff; }
@@ -319,7 +319,7 @@
     </div>
 
     <div class="gs-reveal mt-16 flex flex-col items-start gap-4">
-      <div class="pay-selector" data-target="story-cta">
+      <div class="pay-selector light" data-target="story-cta">
         <button class="pay-opt active" data-platform="venmo" data-href="https://venmo.com/u/Michelle-Weirman">Venmo</button>
         <button class="pay-opt" data-platform="cashapp" data-href="https://cash.app/$MichelleWeirman">Cash App</button>
         <button class="pay-opt" data-platform="zelle" data-href="#">Zelle</button>
