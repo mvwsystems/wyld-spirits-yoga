@@ -125,7 +125,29 @@
     }
     .zelle-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(110, 26, 240, 0.35); }
     .zelle-btn:active { transform: translateY(-1px); }
-    .zelle-btn.copied { background: linear-gradient(135deg, #3F5D4A 0%, #2C4A38 100%); box-shadow: 0 8px 32px rgba(63,93,74,0.3); }
+    .zelle-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #6E1AF0;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 9999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      z-index: 10000;
+      opacity: 0;
+      white-space: nowrap;
+      pointer-events: none;
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s;
+      box-shadow: 0 8px 32px rgba(110,26,240,0.4);
+    }
+    .zelle-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
 
     .pay-selector {
       display: inline-flex;
@@ -587,7 +609,7 @@
           cta.removeAttribute('href');
           cta.removeAttribute('target');
           cta.setAttribute('data-zelle', 'true');
-          if (span) span.textContent = 'Copy Number · ' + ZELLE_DISPLAY;
+          if (span) span.textContent = 'Pay via Zelle';
         } else {
           cta.href = btn.dataset.href;
           cta.setAttribute('target', '_blank');
@@ -607,25 +629,26 @@
     cta.addEventListener('click', e => {
       if (cta.getAttribute('data-zelle') !== 'true') return;
       e.preventDefault();
-      const span = cta.querySelector('span');
-      const copy = () => {
-        cta.classList.add('copied');
-        cta.classList.remove('zelle-btn');
-        if (span) span.textContent = 'Copied! Open your bank app → Zelle';
-        setTimeout(() => {
-          cta.classList.remove('copied');
-          cta.classList.add('zelle-btn');
-          if (span) span.textContent = 'Copy Number · ' + ZELLE_DISPLAY;
-        }, 2800);
+      const doToast = () => {
+        let toast = document.getElementById('zelle-toast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'zelle-toast';
+          toast.className = 'zelle-toast';
+          toast.textContent = '✓  Number copied — open your bank app and find Zelle';
+          document.body.appendChild(toast);
+        }
+        toast.classList.add('show');
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => toast.classList.remove('show'), 3200);
       };
-      navigator.clipboard.writeText(ZELLE_RAW).then(copy).catch(() => {
-        // Fallback for browsers that block clipboard without interaction context
+      navigator.clipboard.writeText(ZELLE_RAW).then(doToast).catch(() => {
         const ta = document.createElement('textarea');
         ta.value = ZELLE_RAW;
-        ta.style.position = 'fixed'; ta.style.opacity = '0';
+        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
         document.body.appendChild(ta);
         ta.focus(); ta.select();
-        try { document.execCommand('copy'); copy(); } catch (_) {}
+        try { document.execCommand('copy'); doToast(); } catch (_) {}
         document.body.removeChild(ta);
       });
     });
