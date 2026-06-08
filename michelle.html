@@ -942,7 +942,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 // ===== QTY CONTROL =====
 function changeQty(delta) {
-  yogaQty = Math.max(1, Math.min(50, yogaQty + delta));
+  yogaQty = Math.max(0, Math.min(50, yogaQty + delta));
   document.getElementById('yoga-qty-display').textContent = yogaQty;
   document.getElementById('yoga-subtotal').textContent = '$' + (yogaQty * 35);
   updateTotal();
