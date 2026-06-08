@@ -1,187 +1,627 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yoga for Michelle — A Community Flow of Love, Hope & Healing</title>
-  <meta name="description" content="Join us June 27th at Toyota Music Factory for a zen & stretch yoga fundraiser in honor of Michelle. 50 spots. $35. All proceeds go directly to Michelle.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Lato:wght@100;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Sacramento&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <style>
-    .font-serif  { font-family: 'Playfair Display', serif; }
-    .font-script { font-family: 'Sacramento', cursive; }
-    .font-mono   { font-family: 'JetBrains Mono', monospace; }
-    body { font-family: 'Lato', sans-serif; background-color: #F5F0EA; color: #2C2018; }
-    ::-webkit-scrollbar { width: 0.5rem; }
-    ::-webkit-scrollbar-track { background: #F5F0EA; }
-    ::-webkit-scrollbar-thumb { background: #D8CFC4; border-radius: 1rem; }
-    ::-webkit-scrollbar-thumb:hover { background: #C9B08A; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoga for Michelle — A Community Flow of Love, Hope & Healing</title>
+<meta name="description" content="Join us June 27th at Toyota Music Factory for a zen & stretch yoga fundraiser in honor of Michelle. 50 spots. $35. All proceeds go directly to Michelle.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Lato:wght@100;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Sacramento&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+.font-serif { font-family: 'Playfair Display', serif; }
+.font-script { font-family: 'Sacramento', cursive; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+body { font-family: 'Lato', sans-serif; background-color: #F5F0EA; color: #2C2018; }
+::-webkit-scrollbar { width: 0.5rem; }
+::-webkit-scrollbar-track { background: #F5F0EA; }
+::-webkit-scrollbar-thumb { background: #D8CFC4; border-radius: 1rem; }
+::-webkit-scrollbar-thumb:hover { background: #C9B08A; }
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 2px solid #C96B85;
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.float { animation: float 4s ease-in-out infinite; }
+@keyframes countdown-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.countdown-pulse { animation: countdown-pulse 2s ease-in-out infinite; }
+.heart-icon { color: #C96B85; }
+.pink-accent { color: #C96B85; }
+.pink-bg { background-color: #C96B85; }
+.pink-border { border-color: #C96B85; }
+.pink-bg-light { background-color: #FAE8ED; }
+.pink-bg-mid { background-color: #F2C8D4; }
+.spots-bar {
+  background: linear-gradient(90deg, #C96B85, #D4627A);
+  height: 4px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.venmo-btn {
+  background: linear-gradient(135deg, #C96B85 0%, #B85272 100%);
+  box-shadow: 0 8px 32px rgba(201, 107, 133, 0.35);
+  transition: all 0.3s ease;
+}
+.venmo-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(201, 107, 133, 0.45);
+}
+.venmo-btn:active { transform: translateY(-1px); }
+.donate-btn {
+  border: 2px solid #C96B85;
+  color: #C96B85;
+  transition: all 0.3s ease;
+}
+.donate-btn:hover {
+  background: #C96B85;
+  color: #FAF7F2;
+  transform: translateY(-2px);
+}
+.ribbon-svg { filter: drop-shadow(0 4px 12px rgba(201,107,133,0.3)); }
+@keyframes scroll-fade-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.gs-reveal { opacity: 0; }
+.gs-reveal.visible {
+  animation: scroll-fade-in 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.detail-card {
+  background: #FAF7F2;
+  border: 1px solid rgba(201,107,133,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.detail-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(201,107,133,0.12);
+}
+.urgency-strip {
+  background: linear-gradient(90deg, #2C2018 0%, #3D2B1F 50%, #2C2018 100%);
+}
+.cashapp-btn {
+  background: linear-gradient(135deg, #00C244 0%, #00A337 100%);
+  box-shadow: 0 8px 32px rgba(0, 194, 68, 0.25);
+  transition: all 0.3s ease;
+  color: #fff;
+}
+.cashapp-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0, 194, 68, 0.35); }
+.cashapp-btn:active { transform: translateY(-1px); }
+.zelle-btn {
+  background: linear-gradient(135deg, #6E1AF0 0%, #5813CC 100%);
+  box-shadow: 0 8px 32px rgba(110, 26, 240, 0.25);
+  transition: all 0.3s ease;
+  color: #fff;
+}
+.zelle-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(110, 26, 240, 0.35); }
+.zelle-btn:active { transform: translateY(-1px); }
+.zelle-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  background: #6E1AF0;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  z-index: 10000;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s;
+  box-shadow: 0 8px 32px rgba(110,26,240,0.4);
+}
+.zelle-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+.pay-selector {
+  display: inline-flex;
+  background: rgba(255,255,255,0.1);
+  border-radius: 9999px;
+  padding: 4px;
+  gap: 2px;
+}
+.pay-selector.light { background: rgba(44,32,24,0.08); border: 1px solid rgba(44,32,24,0.1); }
+.pay-opt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: rgba(255,255,255,0.55);
+  background: transparent;
+}
+.pay-selector.light .pay-opt { color: rgba(44,32,24,0.55); }
+.pay-opt.active[data-platform="venmo"] { background: #C96B85; color: #FAF7F2; }
+.pay-opt.active[data-platform="cashapp"] { background: #00C244; color: #fff; }
+.pay-opt.active[data-platform="zelle"] { background: #6E1AF0; color: #fff; }
 
-    @keyframes pulse-ring {
-      0% { transform: scale(1); opacity: 0.6; }
-      100% { transform: scale(1.4); opacity: 0; }
-    }
-    .pulse-ring::before {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border-radius: 9999px;
-      border: 2px solid #C96B85;
-      animation: pulse-ring 2s ease-out infinite;
-    }
+/* ===== MODAL STYLES ===== */
+#registration-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(28, 18, 10, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+#registration-modal.open { display: flex; }
+.modal-box {
+  background: #FAF7F2;
+  border-radius: 2rem;
+  max-width: 560px;
+  width: 100%;
+  max-height: 90dvh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 32px 96px rgba(44,32,24,0.45);
+  border: 1px solid rgba(201,107,133,0.2);
+  scrollbar-width: thin;
+  scrollbar-color: #D8CFC4 #F5F0EA;
+}
+.modal-box::-webkit-scrollbar { width: 4px; }
+.modal-box::-webkit-scrollbar-track { background: #F5F0EA; }
+.modal-box::-webkit-scrollbar-thumb { background: #C9B08A; border-radius: 2px; }
+.modal-header {
+  background: linear-gradient(135deg, #2C2018 0%, #3D2B1F 100%);
+  border-radius: 2rem 2rem 0 0;
+  padding: 2rem 2rem 1.75rem;
+  text-align: center;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 9999px;
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: #FAF7F2;
+  transition: background 0.2s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.2); }
+.modal-body { padding: 1.75rem 2rem 2rem; }
+.form-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(44,32,24,0.5);
+  display: block;
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  border: 1.5px solid rgba(44,32,24,0.15);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  color: #2C2018;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  border-color: #C96B85;
+  box-shadow: 0 0 0 3px rgba(201,107,133,0.12);
+}
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #fff;
+  border: 1.5px solid rgba(44,32,24,0.15);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  width: fit-content;
+}
+.qty-btn {
+  background: none;
+  border: none;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: #C96B85;
+  font-size: 1.25rem;
+  transition: background 0.2s;
+}
+.qty-btn:hover { background: rgba(201,107,133,0.08); }
+.qty-display {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  min-width: 40px;
+  text-align: center;
+  color: #2C2018;
+  padding: 0 4px;
+}
+.raffle-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid rgba(44,32,24,0.15);
+  border-radius: 0.875rem;
+  cursor: pointer;
+  background: #fff;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+.raffle-option:hover { border-color: #C96B85; background: #FFF5F8; }
+.raffle-option.selected { border-color: #C96B85; background: #FFF0F5; }
+.raffle-option input[type="radio"] { display: none; }
+.raffle-dot {
+  width: 18px; height: 18px;
+  border-radius: 9999px;
+  border: 2px solid rgba(44,32,24,0.25);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s;
+}
+.raffle-option.selected .raffle-dot { border-color: #C96B85; }
+.raffle-dot-inner {
+  width: 8px; height: 8px;
+  border-radius: 9999px;
+  background: #C96B85;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.raffle-option.selected .raffle-dot-inner { opacity: 1; transform: scale(1); }
+.total-bar {
+  background: linear-gradient(135deg, #2C2018 0%, #3D2B1F 100%);
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+}
+.modal-pay-btn {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  transition: all 0.3s ease;
+  color: #FAF7F2;
+}
+.modal-pay-btn.venmo { background: linear-gradient(135deg, #C96B85 0%, #B85272 100%); box-shadow: 0 8px 24px rgba(201,107,133,0.35); }
+.modal-pay-btn.venmo:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(201,107,133,0.45); }
+.modal-pay-btn.cashapp { background: linear-gradient(135deg, #00C244 0%, #00A337 100%); box-shadow: 0 8px 24px rgba(0,194,68,0.25); }
+.modal-pay-btn.cashapp:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,194,68,0.35); }
+.modal-pay-btn.zelle { background: linear-gradient(135deg, #6E1AF0 0%, #5813CC 100%); box-shadow: 0 8px 24px rgba(110,26,240,0.25); }
+.modal-pay-btn.zelle:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(110,26,240,0.35); }
+.modal-pay-selector {
+  display: flex;
+  background: rgba(44,32,24,0.06);
+  border: 1px solid rgba(44,32,24,0.1);
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 2px;
+  width: fit-content;
+}
+.modal-pay-opt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: rgba(44,32,24,0.5);
+  background: transparent;
+}
+.modal-pay-opt.active[data-platform="venmo"] { background: #C96B85; color: #FAF7F2; }
+.modal-pay-opt.active[data-platform="cashapp"] { background: #00C244; color: #fff; }
+.modal-pay-opt.active[data-platform="zelle"] { background: #6E1AF0; color: #fff; }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-    .float { animation: float 4s ease-in-out infinite; }
-
-    @keyframes countdown-pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-    .countdown-pulse { animation: countdown-pulse 2s ease-in-out infinite; }
-
-    .heart-icon { color: #C96B85; }
-    .pink-accent { color: #C96B85; }
-    .pink-bg { background-color: #C96B85; }
-    .pink-border { border-color: #C96B85; }
-    .pink-bg-light { background-color: #FAE8ED; }
-    .pink-bg-mid { background-color: #F2C8D4; }
-
-    .spots-bar {
-      background: linear-gradient(90deg, #C96B85, #D4627A);
-      height: 4px;
-      border-radius: 2px;
-      transition: width 0.3s ease;
-    }
-
-    .venmo-btn {
-      background: linear-gradient(135deg, #C96B85 0%, #B85272 100%);
-      box-shadow: 0 8px 32px rgba(201, 107, 133, 0.35);
-      transition: all 0.3s ease;
-    }
-    .venmo-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 48px rgba(201, 107, 133, 0.45);
-    }
-    .venmo-btn:active { transform: translateY(-1px); }
-
-    .donate-btn {
-      border: 2px solid #C96B85;
-      color: #C96B85;
-      transition: all 0.3s ease;
-    }
-    .donate-btn:hover {
-      background: #C96B85;
-      color: #FAF7F2;
-      transform: translateY(-2px);
-    }
-
-    .ribbon-svg { filter: drop-shadow(0 4px 12px rgba(201,107,133,0.3)); }
-
-    @keyframes scroll-fade-in {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .gs-reveal { opacity: 0; }
-    .gs-reveal.visible {
-      animation: scroll-fade-in 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-
-    .detail-card {
-      background: #FAF7F2;
-      border: 1px solid rgba(201,107,133,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .detail-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(201,107,133,0.12);
-    }
-
-    .urgency-strip {
-      background: linear-gradient(90deg, #2C2018 0%, #3D2B1F 50%, #2C2018 100%);
-    }
-
-    .cashapp-btn {
-      background: linear-gradient(135deg, #00C244 0%, #00A337 100%);
-      box-shadow: 0 8px 32px rgba(0, 194, 68, 0.25);
-      transition: all 0.3s ease;
-      color: #fff;
-    }
-    .cashapp-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0, 194, 68, 0.35); }
-    .cashapp-btn:active { transform: translateY(-1px); }
-
-    .zelle-btn {
-      background: linear-gradient(135deg, #6E1AF0 0%, #5813CC 100%);
-      box-shadow: 0 8px 32px rgba(110, 26, 240, 0.25);
-      transition: all 0.3s ease;
-      color: #fff;
-    }
-    .zelle-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(110, 26, 240, 0.35); }
-    .zelle-btn:active { transform: translateY(-1px); }
-    .zelle-toast {
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(120px);
-      background: #6E1AF0;
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 9999px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      z-index: 10000;
-      opacity: 0;
-      white-space: nowrap;
-      pointer-events: none;
-      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s;
-      box-shadow: 0 8px 32px rgba(110,26,240,0.4);
-    }
-    .zelle-toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    .pay-selector {
-      display: inline-flex;
-      background: rgba(255,255,255,0.1);
-      border-radius: 9999px;
-      padding: 4px;
-      gap: 2px;
-    }
-    .pay-selector.light { background: rgba(44,32,24,0.08); border: 1px solid rgba(44,32,24,0.1); }
-    .pay-opt {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      border-radius: 9999px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      color: rgba(255,255,255,0.55);
-      background: transparent;
-    }
-    .pay-selector.light .pay-opt { color: rgba(44,32,24,0.55); }
-    .pay-opt.active[data-platform="venmo"]   { background: #C96B85; color: #FAF7F2; }
-    .pay-opt.active[data-platform="cashapp"] { background: #00C244; color: #fff; }
-    .pay-opt.active[data-platform="zelle"]   { background: #6E1AF0; color: #fff; }
-  </style>
+/* Confirmation screen */
+#modal-confirmation { display: none; }
+#modal-form-view { display: block; }
+.confirm-handle-box {
+  border: 1.5px dashed rgba(201,107,133,0.4);
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(201,107,133,0.04);
+  text-align: center;
+  margin: 1rem 0;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(16px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-box { animation: modal-in 0.35s cubic-bezier(0.16,1,0.3,1) both; }
+</style>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-[#C96B85] selection:text-[#FAF7F2]">
 
 <!-- NOISE OVERLAY -->
 <div style="position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.04;mix-blend-mode:multiply;background-image:url('data:image/svg+xml,%3Csvg viewBox%3D%220 0 200 200%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cfilter id%3D%22n%22%3E%3CfeTurbulence type%3D%22fractalNoise%22 baseFrequency%3D%220.8%22 numOctaves%3D%223%22 stitchTiles%3D%22stitch%22%2F%3E%3C%2Ffilter%3E%3Crect width%3D%22100%25%22 height%3D%22100%25%22 filter%3D%22url(%23n)%22%2F%3E%3C%2Fsvg%3E');"></div>
 
-<!-- MINIMAL NAVBAR (no active links — this page is not in nav) -->
+<!-- ===== REGISTRATION MODAL ===== -->
+<div id="registration-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <!-- Header -->
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="float mb-3" style="display:inline-block;">
+        <svg class="ribbon-svg w-10 h-12" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 38 C40 38, 10 20, 10 10 C10 4, 15 0, 40 0 C65 0, 70 4, 70 10 C70 20, 40 38, 40 38Z" fill="#C96B85" opacity="0.9"/>
+          <path d="M40 38 C40 38, 10 20, 10 10 C10 4, 25 0, 40 10 C55 0, 70 4, 70 10 C70 20, 40 38, 40 38Z" fill="#D4627A"/>
+          <path d="M40 42 L25 100 L40 85 L55 100 Z" fill="#C96B85" opacity="0.85"/>
+          <circle cx="40" cy="38" r="5" fill="#FAE8ED"/>
+        </svg>
+      </div>
+      <h2 id="modal-title" class="font-serif text-2xl font-normal text-[#FAF7F2] mb-1">Secure Your Spot</h2>
+      <p class="font-mono text-xs tracking-widest uppercase" style="color:#C9B08A;">Yoga for Michelle · June 27th</p>
+    </div>
+
+    <!-- FORM VIEW -->
+    <div id="modal-form-view" class="modal-body">
+
+      <!-- Hidden FormSubmit fields -->
+      <form id="registration-form" style="display:none;" method="POST" action="https://formsubmit.co/wyldspiritsyoga@gmail.com">
+        <input type="hidden" name="_subject" value="🎉 New Registration — Yoga for Michelle">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="">
+        <input type="hidden" id="fs-name" name="Name">
+        <input type="hidden" id="fs-email" name="Email">
+        <input type="hidden" id="fs-phone" name="Phone">
+        <input type="hidden" id="fs-yoga-qty" name="Yoga_Tickets_Qty">
+        <input type="hidden" id="fs-yoga-total" name="Yoga_Tickets_Subtotal">
+        <input type="hidden" id="fs-raffle-tier" name="Raffle_Tier">
+        <input type="hidden" id="fs-raffle-total" name="Raffle_Subtotal">
+        <input type="hidden" id="fs-donation" name="Additional_Donation">
+        <input type="hidden" id="fs-grand-total" name="Grand_Total">
+        <input type="hidden" id="fs-payment" name="Payment_Method">
+      </form>
+
+      <!-- Step 1: Contact Info -->
+      <div class="mb-6">
+        <p class="font-mono text-xs tracking-widest uppercase text-[#C96B85] mb-3" style="font-size:9px;">Step 1 — Your Info</p>
+        <div class="space-y-3">
+          <div>
+            <label class="form-label" for="reg-name">Full Name *</label>
+            <input class="form-input" type="text" id="reg-name" placeholder="Your name" required autocomplete="name">
+          </div>
+          <div>
+            <label class="form-label" for="reg-email">Email Address *</label>
+            <input class="form-input" type="email" id="reg-email" placeholder="you@email.com" required autocomplete="email">
+          </div>
+          <div>
+            <label class="form-label" for="reg-phone">Phone Number *</label>
+            <input class="form-input" type="tel" id="reg-phone" placeholder="(555) 000-0000" required autocomplete="tel">
+          </div>
+        </div>
+      </div>
+
+      <hr style="border-color:rgba(44,32,24,0.08);margin:1.5rem 0;">
+
+      <!-- Step 2: Yoga Tickets -->
+      <div class="mb-6">
+        <p class="font-mono text-xs tracking-widest uppercase text-[#C96B85] mb-3" style="font-size:9px;">Step 2 — Yoga Tickets · $35 each</p>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="font-serif text-lg text-[#2C2018]">Yoga Class Ticket</p>
+            <p class="text-sm font-light text-[#3D2B1F]/60">June 27th · 9:30 AM · Toyota Music Factory</p>
+          </div>
+          <div class="qty-control">
+            <button type="button" class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease">−</button>
+            <span class="qty-display" id="yoga-qty-display">1</span>
+            <button type="button" class="qty-btn" onclick="changeQty(1)" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <p class="text-right font-mono text-sm mt-2" style="color:#C96B85;">
+          Subtotal: <span id="yoga-subtotal">$35</span>
+        </p>
+      </div>
+
+      <hr style="border-color:rgba(44,32,24,0.08);margin:1.5rem 0;">
+
+      <!-- Step 3: Raffle Tickets -->
+      <div class="mb-6">
+        <p class="font-mono text-xs tracking-widest uppercase text-[#C96B85] mb-3" style="font-size:9px;">Step 3 — Raffle Tickets (Optional)</p>
+        <div class="space-y-2" id="raffle-options">
+          <label class="raffle-option" onclick="selectRaffle(this, 0, 'None')">
+            <input type="radio" name="raffle" value="none" checked>
+            <div class="raffle-dot"><div class="raffle-dot-inner"></div></div>
+            <div class="flex-1">
+              <span class="font-light text-[#2C2018]">No raffle tickets</span>
+            </div>
+            <span class="font-mono text-sm text-[#3D2B1F]/40">$0</span>
+          </label>
+          <label class="raffle-option" onclick="selectRaffle(this, 5, '$5 — 1 ticket')">
+            <input type="radio" name="raffle" value="5">
+            <div class="raffle-dot"><div class="raffle-dot-inner"></div></div>
+            <div class="flex-1">
+              <span class="font-light text-[#2C2018]">1 raffle ticket</span>
+            </div>
+            <span class="font-mono text-sm font-medium" style="color:#C96B85;">$5</span>
+          </label>
+          <label class="raffle-option" onclick="selectRaffle(this, 20, '$20 — 5 tickets')">
+            <input type="radio" name="raffle" value="20">
+            <div class="raffle-dot"><div class="raffle-dot-inner"></div></div>
+            <div class="flex-1">
+              <span class="font-light text-[#2C2018]">5 raffle tickets</span>
+              <span class="font-mono text-xs ml-2 px-2 py-0.5 rounded-full" style="background:#FAE8ED;color:#C96B85;">best value</span>
+            </div>
+            <span class="font-mono text-sm font-medium" style="color:#C96B85;">$20</span>
+          </label>
+          <label class="raffle-option" onclick="selectRaffle(this, 35, '$35 — 10 tickets')">
+            <input type="radio" name="raffle" value="35">
+            <div class="raffle-dot"><div class="raffle-dot-inner"></div></div>
+            <div class="flex-1">
+              <span class="font-light text-[#2C2018]">10 raffle tickets</span>
+            </div>
+            <span class="font-mono text-sm font-medium" style="color:#C96B85;">$35</span>
+          </label>
+          <label class="raffle-option" onclick="selectRaffle(this, 50, '$50 — 15 tickets')">
+            <input type="radio" name="raffle" value="50">
+            <div class="raffle-dot"><div class="raffle-dot-inner"></div></div>
+            <div class="flex-1">
+              <span class="font-light text-[#2C2018]">15 raffle tickets</span>
+            </div>
+            <span class="font-mono text-sm font-medium" style="color:#C96B85;">$50</span>
+          </label>
+        </div>
+      </div>
+
+      <hr style="border-color:rgba(44,32,24,0.08);margin:1.5rem 0;">
+
+      <!-- Step 4: Additional Donation -->
+      <div class="mb-6">
+        <p class="font-mono text-xs tracking-widest uppercase text-[#C96B85] mb-3" style="font-size:9px;">Step 4 — Additional Donation (Optional)</p>
+        <p class="text-sm font-light text-[#3D2B1F]/60 mb-3">Want to give a little extra love directly to Michelle?</p>
+        <div class="relative">
+          <span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-serif text-lg text-[#3D2B1F]/40">$</span>
+          <input class="form-input pl-8" type="number" id="extra-donation" placeholder="0" min="0" step="1" oninput="updateTotal()">
+        </div>
+      </div>
+
+      <hr style="border-color:rgba(44,32,24,0.08);margin:1.5rem 0;">
+
+      <!-- Step 5: Payment Method -->
+      <div class="mb-5">
+        <p class="font-mono text-xs tracking-widest uppercase text-[#C96B85] mb-3" style="font-size:9px;">Step 5 — How You'll Pay</p>
+        <div class="modal-pay-selector mb-3" id="modal-pay-selector">
+          <button type="button" class="modal-pay-opt active" data-platform="venmo" onclick="selectModalPay('venmo', this)">Venmo</button>
+          <button type="button" class="modal-pay-opt" data-platform="cashapp" onclick="selectModalPay('cashapp', this)">Cash App</button>
+          <button type="button" class="modal-pay-opt" data-platform="zelle" onclick="selectModalPay('zelle', this)">Zelle</button>
+        </div>
+        <p class="font-mono text-xs text-[#3D2B1F]/40 tracking-wide" id="modal-pay-note">You'll be redirected to Venmo after submitting.</p>
+      </div>
+
+      <!-- Total Bar -->
+      <div class="total-bar">
+        <div class="flex justify-between items-center mb-2">
+          <span class="font-mono text-xs tracking-widest uppercase text-[#C9B08A]">Yoga Tickets</span>
+          <span class="font-mono text-sm text-[#FAF7F2]" id="total-yoga-line">$35</span>
+        </div>
+        <div class="flex justify-between items-center mb-2" id="total-raffle-row" style="display:none!important;">
+          <span class="font-mono text-xs tracking-widest uppercase text-[#C9B08A]">Raffle Tickets</span>
+          <span class="font-mono text-sm text-[#FAF7F2]" id="total-raffle-line">$0</span>
+        </div>
+        <div class="flex justify-between items-center mb-3" id="total-donation-row" style="display:none!important;">
+          <span class="font-mono text-xs tracking-widest uppercase text-[#C9B08A]">Extra Donation</span>
+          <span class="font-mono text-sm text-[#FAF7F2]" id="total-donation-line">$0</span>
+        </div>
+        <div class="border-t border-[#FAF7F2]/10 pt-3 flex justify-between items-center">
+          <span class="font-serif italic text-xl text-[#FAF7F2]">Total</span>
+          <span class="font-serif text-2xl" style="color:#C9B08A;" id="grand-total-display">$35</span>
+        </div>
+      </div>
+
+      <!-- Error message -->
+      <p id="form-error" class="text-sm text-red-500 font-light mb-3" style="display:none;"></p>
+
+      <!-- Submit Button -->
+      <button type="button" id="modal-submit-btn" class="modal-pay-btn venmo" onclick="submitRegistration()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="submit-btn-text">Submit & Pay via Venmo</span>
+      </button>
+      <p class="text-center font-mono text-xs text-[#3D2B1F]/35 tracking-wide mt-3">100% goes directly to Michelle · No fees</p>
+    </div>
+
+    <!-- CONFIRMATION VIEW -->
+    <div id="modal-confirmation" class="modal-body">
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background:linear-gradient(135deg,#FAE8ED,#F2C8D4);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="#C96B85"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 class="font-serif text-2xl text-[#2C2018] mb-1">You're registered!</h3>
+        <p class="font-light text-[#3D2B1F]/60 text-sm">Michelle's team has been notified. Now complete your payment below.</p>
+      </div>
+
+      <div class="bg-[#F5F0EA] rounded-xl p-4 mb-5 text-sm space-y-1.5">
+        <div class="flex justify-between">
+          <span class="font-mono text-xs text-[#3D2B1F]/50 uppercase tracking-wider">Name</span>
+          <span class="font-light" id="conf-name">—</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="font-mono text-xs text-[#3D2B1F]/50 uppercase tracking-wider">Yoga Tickets</span>
+          <span class="font-light" id="conf-yoga">—</span>
+        </div>
+        <div class="flex justify-between" id="conf-raffle-row">
+          <span class="font-mono text-xs text-[#3D2B1F]/50 uppercase tracking-wider">Raffle</span>
+          <span class="font-light" id="conf-raffle">—</span>
+        </div>
+        <div class="flex justify-between" id="conf-donation-row">
+          <span class="font-mono text-xs text-[#3D2B1F]/50 uppercase tracking-wider">Extra Donation</span>
+          <span class="font-light" id="conf-donation">—</span>
+        </div>
+        <div class="flex justify-between border-t border-[#D8CFC4] pt-2 mt-2">
+          <span class="font-serif italic text-base">Total Due</span>
+          <span class="font-serif text-xl" style="color:#C96B85;" id="conf-total">—</span>
+        </div>
+      </div>
+
+      <div class="confirm-handle-box">
+        <p class="font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/40 mb-2">Send payment to</p>
+        <p class="font-serif text-2xl text-[#2C2018] mb-1" id="conf-handle">@Michelle-Weirman</p>
+        <p class="text-sm font-light text-[#3D2B1F]/60" id="conf-platform-name">via Venmo</p>
+        <p class="font-mono text-xs text-[#3D2B1F]/40 mt-2">Add <strong class="font-normal">"Yoga for Michelle"</strong> in the note</p>
+      </div>
+
+      <a id="conf-pay-link" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener" class="modal-pay-btn venmo" style="text-decoration:none;margin-top:0.75rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span id="conf-pay-btn-text">Open Venmo Now</span>
+      </a>
+
+      <button type="button" onclick="closeModal()" class="w-full mt-3 py-3 rounded-xl font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/40 hover:text-[#3D2B1F]/70 transition-colors border border-transparent hover:border-[#D8CFC4]">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+<!-- ===== END MODAL ===== -->
+
+<!-- Zelle toast -->
+<div id="zelle-toast" class="zelle-toast">✓ Number copied — open your bank app and find Zelle</div>
+
+<!-- MINIMAL NAVBAR -->
 <nav id="navbar" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95vw] md:w-[90vw] lg:w-[70vw] rounded-full transition-all duration-500 py-3 px-6 md:px-8 flex justify-between items-center border border-transparent" style="background:rgba(44,32,24,0.85);backdrop-filter:blur(12px);border-color:rgba(201,176,138,0.2);color:#FAF7F2;">
   <div class="flex items-center gap-3">
     <a href="index.html" class="font-serif italic tracking-tight text-xl md:text-2xl mt-1 text-[#FAF7F2]">Wyld Spirits Yoga</a>
@@ -193,19 +633,20 @@
     <a href="about.html" class="hover:text-[#C86B4A] transition-colors relative group">About<span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#C86B4A] transition-all group-hover:w-full"></span></a>
   </div>
   <div class="flex items-center gap-2">
-    <a href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener" class="hidden sm:inline-block text-[#FAF7F2] px-5 py-2.5 rounded-full text-sm md:text-base font-normal tracking-wide border transition-colors" style="background:#C96B85;border-color:rgba(201,107,133,0.3);">Secure a Spot</a>
+    <button onclick="openModal()" class="hidden sm:inline-block text-[#FAF7F2] px-5 py-2.5 rounded-full text-sm md:text-base font-normal tracking-wide border transition-colors cursor-pointer" style="background:#C96B85;border-color:rgba(201,107,133,0.3);">Secure a Spot</button>
     <button id="menu-toggle" class="lg:hidden p-2 rounded-full bg-[#FAF7F2]/10 hover:bg-[#FAF7F2]/20 transition-colors text-[#FAF7F2]" onclick="toggleMobileMenu()">
       <i data-lucide="menu" class="w-5 h-5" id="menu-icon"></i>
     </button>
   </div>
 </nav>
+
 <div id="mobile-menu" class="fixed z-40 w-[95vw] md:w-[90vw] bg-[#2C2018] border border-[#6B4F3F]/40 rounded-2xl overflow-hidden lg:hidden" style="display:none;top:5rem;left:50%;transform:translateX(-50%);">
   <div class="flex flex-col p-3">
     <a href="classes.html" class="py-3 px-4 text-[#FAF7F2] font-normal tracking-wide hover:text-[#C86B4A] hover:bg-[#FAF7F2]/5 rounded-xl transition-colors">Classes</a>
     <a href="events.html" class="py-3 px-4 text-[#FAF7F2] font-normal tracking-wide hover:text-[#C86B4A] hover:bg-[#FAF7F2]/5 rounded-xl transition-colors">Events</a>
     <a href="private.html" class="py-3 px-4 text-[#FAF7F2] font-normal tracking-wide hover:text-[#C86B4A] hover:bg-[#FAF7F2]/5 rounded-xl transition-colors">Private</a>
     <a href="about.html" class="py-3 px-4 text-[#FAF7F2] font-normal tracking-wide hover:text-[#C86B4A] hover:bg-[#FAF7F2]/5 rounded-xl transition-colors">About</a>
-    <a href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener" class="mt-2 text-center text-[#FAF7F2] px-6 py-3 rounded-xl font-normal tracking-wide transition-colors" style="background:#C96B85;">Secure a Spot — $35</a>
+    <button onclick="openModal()" class="mt-2 text-center text-[#FAF7F2] px-6 py-3 rounded-xl font-normal tracking-wide transition-colors cursor-pointer" style="background:#C96B85;border:none;">Secure a Spot — $35</button>
   </div>
 </div>
 
@@ -218,12 +659,9 @@
 
 <!-- HERO -->
 <header class="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-[#2C2018] pt-16">
-  <!-- Background texture -->
   <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, #C96B85 0%, transparent 50%), radial-gradient(circle at 80% 20%, #C9B08A 0%, transparent 40%);"></div>
-  <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%221%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-
+  <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%221%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C%2Fg%3E%3C%2Fsvg%3E');"></div>
   <div class="relative z-10 max-w-5xl mx-auto px-[5vw] text-center flex flex-col items-center">
-    <!-- Ribbon -->
     <div class="float mb-6 md:mb-8">
       <svg class="ribbon-svg w-16 h-20 md:w-20 md:h-24" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M40 38 C40 38, 10 20, 10 10 C10 4, 15 0, 40 0 C65 0, 70 4, 70 10 C70 20, 40 38, 40 38Z" fill="#C96B85" opacity="0.9"/>
@@ -232,37 +670,20 @@
         <circle cx="40" cy="38" r="5" fill="#FAE8ED"/>
       </svg>
     </div>
-
-    <!-- Eyebrow -->
     <span class="hero-elem font-mono text-xs md:text-sm tracking-[0.3em] uppercase mb-5 md:mb-6 block" style="color:#C9B08A;">One event · One purpose · One community</span>
-
-    <!-- Title -->
     <div class="hero-elem mb-4 md:mb-6">
       <h1 class="font-serif font-normal tracking-tight leading-none text-[#FAF7F2]" style="font-size:clamp(3.5rem,12vw,8rem);">Yoga for</h1>
       <span class="font-script leading-none block" style="font-size:clamp(4rem,14vw,9.5rem);color:#C96B85;margin-top:-0.15em;">Michelle</span>
     </div>
-
-    <!-- Subtitle -->
     <p class="hero-elem font-serif italic text-[#D8CFC4] text-xl md:text-3xl tracking-wide mb-10 md:mb-14" style="font-weight:400;">A Community Flow of Love, Hope &amp; Healing</p>
-
-    <!-- CTA Block -->
     <div class="hero-elem flex flex-col items-center gap-5">
-      <div class="pay-selector" data-target="hero-cta">
-        <button class="pay-opt active" data-platform="venmo" data-href="https://venmo.com/u/Michelle-Weirman">Venmo</button>
-        <button class="pay-opt" data-platform="cashapp" data-href="https://cash.app/$MichelleWeirman">Cash App</button>
-        <button class="pay-opt" data-platform="zelle" data-href="#">Zelle</button>
-      </div>
-      <a id="hero-cta" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
-         data-default-text="Secure My Spot — $35"
-         class="venmo-btn text-[#FAF7F2] px-8 md:px-12 py-4 md:py-5 rounded-full text-base md:text-lg font-normal tracking-wide flex items-center gap-3">
+      <button onclick="openModal()" class="venmo-btn text-[#FAF7F2] px-8 md:px-12 py-4 md:py-5 rounded-full text-base md:text-lg font-normal tracking-wide flex items-center gap-3 border-none cursor-pointer">
         <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
         <span>Secure My Spot — $35</span>
         <i data-lucide="arrow-right" class="w-5 h-5"></i>
-      </a>
+      </button>
       <p class="font-mono text-xs text-[#D8CFC4]/60 uppercase tracking-widest">all proceeds go directly to michelle</p>
     </div>
-
-    <!-- Spots indicator -->
     <div class="hero-elem mt-12 md:mt-16 flex flex-col items-center gap-3">
       <p class="font-mono text-xs tracking-widest uppercase" style="color:#C9B08A;">Spots Remaining</p>
       <div class="w-64 md:w-80 bg-[#FAF7F2]/10 rounded-full h-1.5 overflow-hidden">
@@ -271,8 +692,6 @@
       <p class="font-sans text-sm text-[#D8CFC4]/70 font-light">Moving fast — this is a one-time event</p>
     </div>
   </div>
-
-
 </header>
 
 <!-- EVENT DETAILS STRIP -->
@@ -304,12 +723,10 @@
 <!-- THE STORY -->
 <section class="py-[15vh] px-[5vw] md:px-[10vw] bg-[#F5F0EA]">
   <div class="max-w-3xl mx-auto">
-
     <div class="gs-reveal mb-12">
       <span class="font-mono text-sm tracking-widest uppercase mb-4 block" style="color:#C96B85;">Her Story</span>
       <h2 class="font-serif text-4xl md:text-6xl font-normal tracking-tight text-[#2C2018] leading-[1.15] mb-8">She shows up for everyone.<br><em>Now it's our turn.</em></h2>
     </div>
-
     <div class="gs-reveal space-y-6 text-[#3D2B1F] text-lg md:text-xl font-light leading-relaxed">
       <p>Michelle is one of ours. She moves through life the way the best of us do — with warmth, generosity, and an open heart that always has room for one more person.</p>
       <p>Right now, she's navigating a breast cancer journey — and while she faces it with the kind of quiet courage that takes your breath away, she shouldn't have to face it alone.</p>
@@ -317,19 +734,11 @@
       <p>One morning. One mat. One hour of movement — dedicated entirely to lifting her up. Your presence is powerful. Your $35 goes directly to Michelle, no middleman, no overhead. Just love, made tangible.</p>
       <p>Together, we flow. Together, we heal. Together, we lift her up.</p>
     </div>
-
-    <div class="gs-reveal mt-16 flex flex-col items-start gap-4">
-      <div class="pay-selector light" data-target="story-cta">
-        <button class="pay-opt active" data-platform="venmo" data-href="https://venmo.com/u/Michelle-Weirman">Venmo</button>
-        <button class="pay-opt" data-platform="cashapp" data-href="https://cash.app/$MichelleWeirman">Cash App</button>
-        <button class="pay-opt" data-platform="zelle" data-href="#">Zelle</button>
-      </div>
-      <a id="story-cta" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
-         data-default-text="I'm In — Secure My $35 Spot"
-         class="venmo-btn text-[#FAF7F2] px-8 py-4 rounded-full text-base font-normal tracking-wide inline-flex items-center gap-3">
+    <div class="gs-reveal mt-16">
+      <button onclick="openModal()" class="venmo-btn text-[#FAF7F2] px-8 py-4 rounded-full text-base font-normal tracking-wide inline-flex items-center gap-3 border-none cursor-pointer">
         <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
         <span>I'm In — Secure My $35 Spot</span>
-      </a>
+      </button>
     </div>
   </div>
 </section>
@@ -341,54 +750,37 @@
       <span class="font-mono text-sm tracking-widest uppercase mb-4 block" style="color:#C9B08A;">What to Expect</span>
       <h2 class="font-serif text-4xl md:text-6xl font-normal tracking-tight text-[#FAF7F2]">A morning you'll<br><em>always remember.</em></h2>
     </div>
-
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Card 1 -->
       <div class="gs-reveal bg-[#3D2B1F] border border-[#6B4F3F]/40 rounded-[1.5rem] p-8 flex gap-6 items-start">
         <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(201,107,133,0.15);">
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#C96B85" stroke-width="1.5">
-            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#C96B85" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
         </div>
         <div>
           <h3 class="font-serif text-2xl font-normal text-[#FAF7F2] mb-2">60-Min Zen &amp; Stretch Flow</h3>
           <p class="text-[#D8CFC4] font-light leading-relaxed">All levels welcome — complete beginners and seasoned practitioners alike. Leave your ego at the door and let your body lead. No perfect poses required.</p>
         </div>
       </div>
-
-      <!-- Card 2 -->
       <div class="gs-reveal bg-[#3D2B1F] border border-[#6B4F3F]/40 rounded-[1.5rem] p-8 flex gap-6 items-start">
         <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(201,107,133,0.15);">
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#C96B85" stroke-width="1.5">
-            <path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
-          </svg>
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#C96B85" stroke-width="1.5"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
         </div>
         <div>
           <h3 class="font-serif text-2xl font-normal text-[#FAF7F2] mb-2">Raffles &amp; Giveaways</h3>
           <p class="text-[#D8CFC4] font-light leading-relaxed">Amazing prizes await — because showing up for Michelle should feel like a gift to you too. Every ticket is entered to win something special.</p>
         </div>
       </div>
-
-      <!-- Card 3 -->
       <div class="gs-reveal bg-[#3D2B1F] border border-[#6B4F3F]/40 rounded-[1.5rem] p-8 flex gap-6 items-start">
         <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(201,107,133,0.15);">
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#C96B85" stroke-width="1.5">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#C96B85" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div>
           <h3 class="font-serif text-2xl font-normal text-[#FAF7F2] mb-2">Community &amp; Connection</h3>
           <p class="text-[#D8CFC4] font-light leading-relaxed">Move alongside people who showed up for the same reason you did — love. This energy is unlike anything a regular class can offer. Come feel it.</p>
         </div>
       </div>
-
-      <!-- Card 4 -->
       <div class="gs-reveal bg-[#3D2B1F] border border-[#6B4F3F]/40 rounded-[1.5rem] p-8 flex gap-6 items-start">
         <div class="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center" style="background:rgba(201,107,133,0.15);">
-          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#C96B85" stroke-width="1.5">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#C96B85" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
         <div>
           <h3 class="font-serif text-2xl font-normal text-[#FAF7F2] mb-2">100% Goes to Michelle</h3>
@@ -396,8 +788,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Bring Your Mat Note -->
     <div class="gs-reveal mt-10 bg-[#FAE8ED]/10 border border-[#C96B85]/20 rounded-2xl p-6 flex items-start gap-4">
       <i data-lucide="info" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:#C96B85;"></i>
       <p class="text-[#D8CFC4] font-light text-base"><strong class="text-[#FAF7F2] font-normal">Heads up:</strong> Mats will be limited at the venue — if you have one, please bring it. And if you don't, come anyway. We'll figure it out together.</p>
@@ -408,18 +798,14 @@
 <!-- THE ASK -->
 <section class="py-[15vh] px-[5vw] md:px-[10vw] bg-[#F5F0EA]">
   <div class="max-w-2xl mx-auto text-center">
-
     <div class="gs-reveal mb-6">
       <span class="font-mono text-sm tracking-widest uppercase mb-4 block" style="color:#C96B85;">Secure Your Spot</span>
       <h2 class="font-serif text-4xl md:text-6xl font-normal tracking-tight text-[#2C2018] leading-[1.15]">50 spots.<br><em>One morning.<br>Her lifetime.</em></h2>
     </div>
-
     <div class="gs-reveal my-10 text-[#3D2B1F] text-lg font-light leading-relaxed space-y-4">
       <p>This class will sell out. And when it does, you'll want to be on the inside — part of the group that chose to show up when it mattered most.</p>
       <p>$35 is two lattes and a magazine. It's also a morning that changes everything for Michelle.</p>
     </div>
-
-    <!-- Price Box -->
     <div class="gs-reveal bg-[#FAF7F2] border border-[#F2C8D4] rounded-[2rem] p-8 md:p-12 mb-8 shadow-lg shadow-pink-100/30">
       <div class="mb-6">
         <p class="font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/50 mb-2">Fundraiser Ticket</p>
@@ -428,33 +814,19 @@
         </div>
         <p class="text-[#3D2B1F] font-light mt-2">All proceeds go directly to Michelle</p>
       </div>
-
       <ul class="text-left space-y-3 mb-8 text-[#3D2B1F]">
         <li class="flex items-center gap-3 font-light"><span style="color:#C96B85;">✦</span> 60-min zen &amp; stretch yoga class — all levels welcome</li>
         <li class="flex items-center gap-3 font-light"><span style="color:#C96B85;">✦</span> Entry into raffle for amazing prizes &amp; giveaways</li>
         <li class="flex items-center gap-3 font-light"><span style="color:#C96B85;">✦</span> An unforgettable morning of community &amp; love</li>
         <li class="flex items-center gap-3 font-light"><span style="color:#C96B85;">✦</span> 100% of your $35 goes straight to Michelle</li>
       </ul>
-
-      <div class="flex justify-center mb-4">
-        <div class="pay-selector light" data-target="price-cta">
-          <button class="pay-opt active" data-platform="venmo" data-href="https://venmo.com/u/Michelle-Weirman">Venmo</button>
-          <button class="pay-opt" data-platform="cashapp" data-href="https://cash.app/$MichelleWeirman">Cash App</button>
-          <button class="pay-opt" data-platform="zelle" data-href="#">Zelle</button>
-        </div>
-      </div>
-      <a id="price-cta" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
-         data-default-text="Pay $35 — I'm In"
-         class="venmo-btn w-full text-[#FAF7F2] px-8 py-5 rounded-2xl text-lg md:text-xl font-normal tracking-wide flex items-center justify-center gap-3">
+      <button onclick="openModal()" class="venmo-btn w-full text-[#FAF7F2] px-8 py-5 rounded-2xl text-lg md:text-xl font-normal tracking-wide flex items-center justify-center gap-3 border-none cursor-pointer">
         <i data-lucide="heart" class="w-6 h-6 fill-current"></i>
-        <span>Pay $35 — I'm In</span>
+        <span>Choose My Tickets — $35+</span>
         <i data-lucide="external-link" class="w-5 h-5"></i>
-      </a>
-
-      <p id="price-note" class="text-[#3D2B1F]/50 text-sm font-mono tracking-wide mt-4">Pay <strong class="font-normal">@Michelle-Weirman</strong> on Venmo · Add "Yoga for Michelle" in the note</p>
+      </button>
+      <p class="text-[#3D2B1F]/50 text-sm font-mono tracking-wide mt-4">Venmo · Cash App · Zelle — your choice</p>
     </div>
-
-    <!-- Urgency note -->
     <div class="gs-reveal">
       <p class="font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/50">⚠ &nbsp; Only 50 spots exist. Once they're gone, they're gone — there is no waitlist, no next time.</p>
     </div>
@@ -468,28 +840,17 @@
       <span class="font-mono text-sm tracking-widest uppercase mb-4 block" style="color:#C96B85;">Can't Make It?</span>
       <h2 class="font-serif text-3xl md:text-5xl font-normal tracking-tight text-[#2C2018] mb-6">Your support still matters — <em>no mat required.</em></h2>
       <p class="text-[#3D2B1F] text-lg font-light leading-relaxed mb-10">If June 27th doesn't work for you, please don't let that stop you from being part of this. A donation of any size — $5, $10, $25, whatever feels right — lands directly in Michelle's hands. Every bit helps. No donation is too small.</p>
-
-      <div class="flex flex-col items-center gap-4">
-        <div class="pay-selector light" data-target="donate-cta">
-          <button class="pay-opt active" data-platform="venmo" data-href="https://venmo.com/u/Michelle-Weirman">Venmo</button>
-          <button class="pay-opt" data-platform="cashapp" data-href="https://cash.app/$MichelleWeirman">Cash App</button>
-          <button class="pay-opt" data-platform="zelle" data-href="#">Zelle</button>
-        </div>
-        <a id="donate-cta" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
-           data-default-text="Donate Any Amount"
-           class="venmo-btn inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-base font-normal tracking-wide text-[#FAF7F2]">
-          <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
-          <span>Donate Any Amount</span>
-          <i data-lucide="external-link" class="w-5 h-5"></i>
-        </a>
-      </div>
-
+      <button onclick="openModal()" class="venmo-btn inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-base font-normal tracking-wide text-[#FAF7F2] border-none cursor-pointer">
+        <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
+        <span>Donate Any Amount</span>
+        <i data-lucide="external-link" class="w-5 h-5"></i>
+      </button>
       <p class="font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/40 mt-5">Add "For Michelle" in your note</p>
     </div>
   </div>
 </section>
 
-<!-- CLOSING STATEMENT -->
+<!-- CLOSING -->
 <section class="py-[15vh] px-[5vw] md:px-[10vw] bg-[#3F5D4A] relative overflow-hidden">
   <div class="absolute inset-0 opacity-10" style="background:radial-gradient(ellipse at 30% 50%, #C96B85 0%, transparent 60%);"></div>
   <div class="relative z-10 max-w-4xl mx-auto text-center">
@@ -497,21 +858,11 @@
       <p class="font-script text-5xl md:text-7xl mb-8" style="color:#C9B08A;">Together, we are stronger.</p>
       <p class="font-sans font-light text-[#D8CFC4] text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4">Let's show Michelle that she is surrounded by love. Not just in words. Not just in thoughts and prayers. But in presence — on a mat, in a room, breathing together.</p>
       <p class="font-serif italic text-[#FAF7F2] text-2xl md:text-3xl mb-12">Together, we flow. Together, we heal.</p>
-
-      <div class="flex flex-col items-center gap-4 mb-8">
-        <div class="pay-selector" data-target="closing-cta">
-          <button class="pay-opt active" data-platform="venmo" data-href="https://venmo.com/u/Michelle-Weirman">Venmo</button>
-          <button class="pay-opt" data-platform="cashapp" data-href="https://cash.app/$MichelleWeirman">Cash App</button>
-          <button class="pay-opt" data-platform="zelle" data-href="#">Zelle</button>
-        </div>
-        <a id="closing-cta" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener"
-           data-default-text="Secure My Spot — $35"
-           class="venmo-btn text-[#FAF7F2] px-10 py-5 rounded-full text-lg font-normal tracking-wide flex items-center gap-3">
-          <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
-          <span>Secure My Spot — $35</span>
-        </a>
-      </div>
-      <div class="flex flex-col items-center gap-1">
+      <button onclick="openModal()" class="venmo-btn text-[#FAF7F2] px-10 py-5 rounded-full text-lg font-normal tracking-wide inline-flex items-center gap-3 border-none cursor-pointer">
+        <i data-lucide="heart" class="w-5 h-5 fill-current"></i>
+        <span>Secure My Spot — $35</span>
+      </button>
+      <div class="flex flex-col items-center gap-1 mt-10">
         <p class="font-mono text-xs text-[#D8CFC4]/50 uppercase tracking-widest">Hosted by</p>
         <p class="font-serif italic text-xl text-[#FAF7F2]">Wyld Spirits Yoga</p>
       </div>
@@ -554,115 +905,229 @@
 </footer>
 
 <script>
-  lucide.createIcons();
+lucide.createIcons();
 
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobile-menu');
-    const icon = document.getElementById('menu-icon');
-    const open = menu.style.display === 'none' || menu.style.display === '';
-    menu.style.display = open ? 'block' : 'none';
-    icon.setAttribute('data-lucide', open ? 'x' : 'menu');
-    lucide.createIcons();
+// ===== MODAL STATE =====
+let yogaQty = 1;
+let raffleAmount = 0;
+let raffleTierLabel = 'None';
+let modalPayPlatform = 'venmo';
+
+const PAYMENT_CONFIG = {
+  venmo:   { url: 'https://venmo.com/u/Michelle-Weirman',   handle: '@Michelle-Weirman', name: 'via Venmo',    btnClass: 'venmo',   note: "You'll be redirected to Venmo after submitting." },
+  cashapp: { url: 'https://cash.app/$MichelleWeirman',      handle: '$MichelleWeirman',   name: 'via Cash App', btnClass: 'cashapp', note: "You'll be redirected to Cash App after submitting." },
+  zelle:   { url: null,                                      handle: '(817) 504-0330',     name: 'via Zelle',    btnClass: 'zelle',   note: "Zelle number will be copied — open your bank app to send." }
+};
+
+function openModal() {
+  const modal = document.getElementById('registration-modal');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modal-form-view').style.display = 'block';
+  document.getElementById('modal-confirmation').style.display = 'none';
+}
+
+function closeModal() {
+  document.getElementById('registration-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on backdrop click
+document.getElementById('registration-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// Close on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ===== QTY CONTROL =====
+function changeQty(delta) {
+  yogaQty = Math.max(1, Math.min(50, yogaQty + delta));
+  document.getElementById('yoga-qty-display').textContent = yogaQty;
+  document.getElementById('yoga-subtotal').textContent = '$' + (yogaQty * 35);
+  updateTotal();
+}
+
+// ===== RAFFLE =====
+function selectRaffle(label, amount, tierLabel) {
+  raffleAmount = amount;
+  raffleTierLabel = tierLabel;
+  document.querySelectorAll('.raffle-option').forEach(opt => opt.classList.remove('selected'));
+  label.classList.add('selected');
+  updateTotal();
+}
+
+// Auto-select first on load
+document.querySelector('.raffle-option').classList.add('selected');
+
+// ===== PAYMENT SELECTOR =====
+function selectModalPay(platform, btn) {
+  modalPayPlatform = platform;
+  document.querySelectorAll('.modal-pay-opt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cfg = PAYMENT_CONFIG[platform];
+  document.getElementById('modal-pay-note').textContent = cfg.note;
+  const submitBtn = document.getElementById('modal-submit-btn');
+  submitBtn.className = 'modal-pay-btn ' + cfg.btnClass;
+  const extraDonation = parseFloat(document.getElementById('extra-donation').value) || 0;
+  const total = yogaQty * 35 + raffleAmount + extraDonation;
+  document.getElementById('submit-btn-text').textContent =
+    platform === 'zelle' ? 'Submit & Copy Zelle Number' :
+    'Submit & Pay via ' + (platform === 'cashapp' ? 'Cash App' : 'Venmo');
+}
+
+// ===== TOTAL CALCULATOR =====
+function updateTotal() {
+  const extra = parseFloat(document.getElementById('extra-donation').value) || 0;
+  const yogaTotal = yogaQty * 35;
+  const total = yogaTotal + raffleAmount + extra;
+
+  document.getElementById('total-yoga-line').textContent = '$' + yogaTotal;
+  document.getElementById('grand-total-display').textContent = '$' + total;
+
+  const raffleRow = document.getElementById('total-raffle-row');
+  if (raffleAmount > 0) {
+    raffleRow.style.setProperty('display', 'flex', 'important');
+    document.getElementById('total-raffle-line').textContent = '$' + raffleAmount;
+  } else {
+    raffleRow.style.setProperty('display', 'none', 'important');
   }
 
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.style.background = 'rgba(44,32,24,0.95)';
-      navbar.style.backdropFilter = 'blur(12px)';
-      navbar.style.borderColor = 'rgba(201,176,138,0.2)';
-    } else {
-      navbar.style.background = 'rgba(44,32,24,0.85)';
+  const donRow = document.getElementById('total-donation-row');
+  if (extra > 0) {
+    donRow.style.setProperty('display', 'flex', 'important');
+    document.getElementById('total-donation-line').textContent = '$' + extra;
+  } else {
+    donRow.style.setProperty('display', 'none', 'important');
+  }
+}
+
+// ===== FORM SUBMISSION =====
+function submitRegistration() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const errEl = document.getElementById('form-error');
+
+  if (!name || !email || !phone) {
+    errEl.textContent = 'Please fill in your name, email, and phone number.';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEl.textContent = 'Please enter a valid email address.';
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const extra = parseFloat(document.getElementById('extra-donation').value) || 0;
+  const yogaTotal = yogaQty * 35;
+  const total = yogaTotal + raffleAmount + extra;
+  const cfg = PAYMENT_CONFIG[modalPayPlatform];
+
+  // Populate hidden form
+  document.getElementById('fs-name').value = name;
+  document.getElementById('fs-email').value = email;
+  document.getElementById('fs-phone').value = phone;
+  document.getElementById('fs-yoga-qty').value = yogaQty + ' ticket(s)';
+  document.getElementById('fs-yoga-total').value = '$' + yogaTotal;
+  document.getElementById('fs-raffle-tier').value = raffleTierLabel;
+  document.getElementById('fs-raffle-total').value = raffleAmount > 0 ? '$' + raffleAmount : '$0';
+  document.getElementById('fs-donation').value = extra > 0 ? '$' + extra : '$0';
+  document.getElementById('fs-grand-total').value = '$' + total;
+  document.getElementById('fs-payment').value = cfg.name.replace('via ', '');
+
+  // Submit via fetch (silent — no page redirect)
+  const formData = new FormData(document.getElementById('registration-form'));
+  fetch('https://formsubmit.co/wyldspiritsyoga@gmail.com', {
+    method: 'POST',
+    body: formData
+  }).catch(() => {}); // silent fail — donor still sees confirmation
+
+  // Show confirmation
+  document.getElementById('modal-form-view').style.display = 'none';
+  const conf = document.getElementById('modal-confirmation');
+  conf.style.display = 'block';
+
+  // Populate confirmation
+  document.getElementById('conf-name').textContent = name;
+  document.getElementById('conf-yoga').textContent = yogaQty + ' ticket(s) — $' + yogaTotal;
+  document.getElementById('conf-total').textContent = '$' + total;
+  document.getElementById('conf-handle').textContent = cfg.handle;
+  document.getElementById('conf-platform-name').textContent = cfg.name;
+
+  const raffleRow = document.getElementById('conf-raffle-row');
+  if (raffleAmount > 0) {
+    raffleRow.style.display = 'flex';
+    document.getElementById('conf-raffle').textContent = raffleTierLabel + ' — $' + raffleAmount;
+  } else {
+    raffleRow.style.display = 'none';
+  }
+  const donRow = document.getElementById('conf-donation-row');
+  if (extra > 0) {
+    donRow.style.display = 'flex';
+    document.getElementById('conf-donation').textContent = '$' + extra;
+  } else {
+    donRow.style.display = 'none';
+  }
+
+  const payLink = document.getElementById('conf-pay-link');
+  payLink.className = 'modal-pay-btn ' + cfg.btnClass;
+  payLink.style.textDecoration = 'none';
+  payLink.style.marginTop = '0.75rem';
+
+  if (modalPayPlatform === 'zelle') {
+    payLink.removeAttribute('href');
+    document.getElementById('conf-pay-btn-text').textContent = 'Copy Zelle Number';
+    payLink.onclick = function(e) {
+      e.preventDefault();
+      navigator.clipboard.writeText('8175040330').catch(() => {});
+      const toast = document.getElementById('zelle-toast');
+      toast.classList.add('show');
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => toast.classList.remove('show'), 3200);
+    };
+  } else {
+    payLink.href = cfg.url;
+    payLink.setAttribute('target', '_blank');
+    payLink.onclick = null;
+    document.getElementById('conf-pay-btn-text').textContent =
+      'Open ' + (modalPayPlatform === 'cashapp' ? 'Cash App' : 'Venmo') + ' Now';
+  }
+
+  // Scroll modal to top
+  document.querySelector('.modal-box').scrollTop = 0;
+}
+
+// ===== NAVBAR =====
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const icon = document.getElementById('menu-icon');
+  const open = menu.style.display === 'none' || menu.style.display === '';
+  menu.style.display = open ? 'block' : 'none';
+  icon.setAttribute('data-lucide', open ? 'x' : 'menu');
+  lucide.createIcons();
+}
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.style.background = window.scrollY > 50 ? 'rgba(44,32,24,0.95)' : 'rgba(44,32,24,0.85)';
+});
+
+// ===== GSAP =====
+gsap.registerPlugin(ScrollTrigger);
+gsap.from('.hero-elem', { y: 60, opacity: 0, duration: 1.2, stagger: 0.12, ease: 'power3.out', delay: 0.3 });
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
     }
   });
-
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.from('.hero-elem', { y: 60, opacity: 0, duration: 1.2, stagger: 0.12, ease: 'power3.out', delay: 0.3 });
-
-  const ZELLE_DISPLAY = '(817) 504-0330';
-  const ZELLE_RAW    = '8175040330';
-
-  const PRICE_NOTES = {
-    venmo:   'Pay <strong class="font-normal">@Michelle-Weirman</strong> on Venmo &nbsp;·&nbsp; Add "Yoga for Michelle" in the note',
-    cashapp: 'Send to <strong class="font-normal">$MichelleWeirman</strong> on Cash App &nbsp;·&nbsp; Add "Yoga for Michelle" in the note',
-    zelle:   'Open your bank app &nbsp;·&nbsp; Find Zelle &nbsp;·&nbsp; Send to <strong class="font-normal">(817) 504-0330</strong> &nbsp;·&nbsp; Add "Yoga for Michelle" in the memo'
-  };
-
-  document.querySelectorAll('.pay-selector').forEach(selector => {
-    const targetId = selector.dataset.target;
-    const cta = document.getElementById(targetId);
-    if (!cta) return;
-
-    selector.querySelectorAll('.pay-opt').forEach(btn => {
-      btn.addEventListener('click', () => {
-        selector.querySelectorAll('.pay-opt').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const platform = btn.dataset.platform;
-
-        // Swap button style
-        cta.classList.remove('venmo-btn', 'cashapp-btn', 'zelle-btn', 'donate-btn', 'copied');
-        cta.classList.add(platform + '-btn');
-
-        const span = cta.querySelector('span');
-
-        if (platform === 'zelle') {
-          cta.removeAttribute('href');
-          cta.removeAttribute('target');
-          cta.setAttribute('data-zelle', 'true');
-          if (span) span.textContent = 'Pay via Zelle';
-        } else {
-          cta.href = btn.dataset.href;
-          cta.setAttribute('target', '_blank');
-          cta.removeAttribute('data-zelle');
-          if (span) span.textContent = cta.dataset.defaultText || 'Pay $35 — I\'m In';
-        }
-
-        // Update price box note
-        if (targetId === 'price-cta') {
-          const note = document.getElementById('price-note');
-          if (note) note.innerHTML = PRICE_NOTES[platform];
-        }
-      });
-    });
-
-    // Zelle clipboard copy handler
-    cta.addEventListener('click', e => {
-      if (cta.getAttribute('data-zelle') !== 'true') return;
-      e.preventDefault();
-      const doToast = () => {
-        let toast = document.getElementById('zelle-toast');
-        if (!toast) {
-          toast = document.createElement('div');
-          toast.id = 'zelle-toast';
-          toast.className = 'zelle-toast';
-          toast.textContent = '✓  Number copied — open your bank app and find Zelle';
-          document.body.appendChild(toast);
-        }
-        toast.classList.add('show');
-        clearTimeout(toast._t);
-        toast._t = setTimeout(() => toast.classList.remove('show'), 3200);
-      };
-      navigator.clipboard.writeText(ZELLE_RAW).then(doToast).catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = ZELLE_RAW;
-        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
-        document.body.appendChild(ta);
-        ta.focus(); ta.select();
-        try { document.execCommand('copy'); doToast(); } catch (_) {}
-        document.body.removeChild(ta);
-      });
-    });
-  });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.gs-reveal').forEach(el => observer.observe(el));
+}, { threshold: 0.15 });
+document.querySelectorAll('.gs-reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
