@@ -572,41 +572,46 @@ body { font-family: 'Lato', sans-serif; background-color: #F5F0EA; color: #2C201
           <svg width="32" height="32" viewBox="0 0 24 24" fill="#C96B85"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
         <h3 class="font-serif text-2xl text-[#2C2018] mb-1">You're registered!</h3>
-        <p class="font-light text-[#3D2B1F]/60 text-sm">Michelle's team has been notified. Now complete your payment below.</p>
+        <p class="text-[#3D2B1F] text-sm">Michelle's team has been notified. Now complete your payment below.</p>
       </div>
 
       <div class="bg-[#F5F0EA] rounded-xl p-4 mb-5 text-sm space-y-1.5">
         <div class="flex justify-between">
-          <span class="font-mono text-xs text-[#3D2B1F]/50 uppercase tracking-wider">Name</span>
-          <span class="font-light" id="conf-name">—</span>
+          <span class="font-mono text-xs text-[#3D2B1F] uppercase tracking-wider font-semibold">Name</span>
+          <span class="text-[#2C2018]" id="conf-name">—</span>
         </div>
         <div class="flex justify-between">
-          <span class="font-mono text-xs text-[#3D2B1F]/50 uppercase tracking-wider">Yoga Tickets</span>
-          <span class="font-light" id="conf-yoga">—</span>
+          <span class="font-mono text-xs text-[#3D2B1F] uppercase tracking-wider font-semibold">Yoga Tickets</span>
+          <span class="text-[#2C2018]" id="conf-yoga">—</span>
         </div>
         <div class="flex justify-between" id="conf-raffle-row">
-          <span class="font-mono text-xs text-[#3D2B1F]/50 uppercase tracking-wider">Raffle</span>
-          <span class="font-light" id="conf-raffle">—</span>
+          <span class="font-mono text-xs text-[#3D2B1F] uppercase tracking-wider font-semibold">Raffle</span>
+          <span class="text-[#2C2018]" id="conf-raffle">—</span>
         </div>
         <div class="flex justify-between" id="conf-donation-row">
-          <span class="font-mono text-xs text-[#3D2B1F]/50 uppercase tracking-wider">Extra Donation</span>
-          <span class="font-light" id="conf-donation">—</span>
+          <span class="font-mono text-xs text-[#3D2B1F] uppercase tracking-wider font-semibold">Extra Donation</span>
+          <span class="text-[#2C2018]" id="conf-donation">—</span>
         </div>
         <div class="flex justify-between border-t border-[#D8CFC4] pt-2 mt-2">
-          <span class="font-serif italic text-base">Total Due</span>
+          <span class="font-serif italic text-base text-[#2C2018]">Total Due</span>
           <span class="font-serif text-xl" style="color:#C96B85;" id="conf-total">—</span>
         </div>
       </div>
 
       <div id="conf-amount-reminder" class="rounded-xl px-4 py-3 mb-4 text-center" style="display:none;">
-        <p id="conf-reminder-text" class="text-sm"></p>
+        <p id="conf-reminder-text" class="text-sm font-medium"></p>
+      </div>
+
+      <!-- Zelle banking app note (shown only for Zelle) -->
+      <div id="conf-zelle-note" class="rounded-xl px-4 py-3 mb-4 text-center text-sm text-[#2C2018]" style="display:none;background:rgba(110,26,240,0.07);border:1px solid rgba(110,26,240,0.18);">
+        Open your <strong>banking app</strong> or the <strong>Zelle app</strong>, search for Zelle, and send to the number that was copied to your clipboard.
       </div>
 
       <div class="confirm-handle-box">
-        <p class="font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/40 mb-2">Send payment to</p>
+        <p class="font-mono text-xs tracking-widest uppercase text-[#3D2B1F] font-semibold mb-2">Send payment to</p>
         <p class="font-serif text-2xl text-[#2C2018] mb-1" id="conf-handle">@Michelle-Weirman</p>
-        <p class="text-sm font-light text-[#3D2B1F]/60" id="conf-platform-name">via Venmo</p>
-        <p class="font-mono text-xs text-[#3D2B1F]/40 mt-2">Add <strong class="font-normal">"Yoga for Michelle"</strong> in the note</p>
+        <p class="text-sm text-[#3D2B1F]" id="conf-platform-name">via Venmo</p>
+        <p class="font-mono text-xs text-[#3D2B1F] mt-2">Add <strong>"Yoga for Michelle"</strong> in the note</p>
       </div>
 
       <a id="conf-pay-link" href="https://venmo.com/u/Michelle-Weirman" target="_blank" rel="noopener" class="modal-pay-btn venmo" style="text-decoration:none;margin-top:0.75rem;">
@@ -614,7 +619,11 @@ body { font-family: 'Lato', sans-serif; background-color: #F5F0EA; color: #2C201
         <span id="conf-pay-btn-text">Open Venmo Now</span>
       </a>
 
-      <button type="button" onclick="closeModal()" class="w-full mt-3 py-3 rounded-xl font-mono text-xs tracking-widest uppercase text-[#3D2B1F]/40 hover:text-[#3D2B1F]/70 transition-colors border border-transparent hover:border-[#D8CFC4]">
+      <div class="mt-4 rounded-xl px-4 py-3 text-center text-sm text-[#2C2018]" style="background:#FAE8ED;border:1px solid rgba(201,107,133,0.25);">
+        <strong>📸 Take a screenshot of this page</strong> as your confirmation before closing.
+      </div>
+
+      <button type="button" onclick="closeModal()" class="w-full mt-3 py-3 rounded-xl font-mono text-xs tracking-widest uppercase text-[#3D2B1F] hover:text-[#2C2018] transition-colors border border-[#D8CFC4] hover:border-[#C9B08A]">
         Close
       </button>
     </div>
@@ -1084,19 +1093,41 @@ function submitRegistration() {
   const reminderEl   = document.getElementById('conf-amount-reminder');
   const reminderText = document.getElementById('conf-reminder-text');
 
+  const zelleNote = document.getElementById('conf-zelle-note');
+  zelleNote.style.display = 'none';
+
   if (modalPayPlatform === 'zelle') {
     payLink.removeAttribute('href');
-    document.getElementById('conf-pay-btn-text').textContent = 'Copy Zelle Number';
+    const btnText = document.getElementById('conf-pay-btn-text');
+    btnText.textContent = 'Copy Zelle Number';
+    zelleNote.style.display = 'block';
     payLink.onclick = function(e) {
       e.preventDefault();
-      navigator.clipboard.writeText('8175040330').catch(() => {});
-      const toast = document.getElementById('zelle-toast');
-      toast.classList.add('show');
-      clearTimeout(toast._t);
-      toast._t = setTimeout(() => toast.classList.remove('show'), 3200);
+      const doCopy = () => {
+        btnText.textContent = '✓  Copied!';
+        payLink.style.opacity = '0.85';
+        const toast = document.getElementById('zelle-toast');
+        toast.classList.add('show');
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => toast.classList.remove('show'), 3200);
+        clearTimeout(payLink._rt);
+        payLink._rt = setTimeout(() => {
+          btnText.textContent = 'Copy Zelle Number';
+          payLink.style.opacity = '';
+        }, 2800);
+      };
+      navigator.clipboard.writeText('8175040330').then(doCopy).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = '8175040330';
+        ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        try { document.execCommand('copy'); doCopy(); } catch(_) {}
+        document.body.removeChild(ta);
+      });
     };
     reminderEl.style.cssText = 'display:block;background:rgba(110,26,240,0.07);border:1px solid rgba(110,26,240,0.18);border-radius:0.75rem;padding:0.75rem 1rem;margin-bottom:1rem;text-align:center;';
-    reminderText.innerHTML = '⚠ &nbsp;After copying, open your bank app and enter <strong style="color:#2C2018;font-weight:700;">$' + total + '</strong> as the amount.';
+    reminderText.innerHTML = '⚠ &nbsp;Enter <strong style="color:#2C2018;font-weight:700;">$' + total + '</strong> as the amount when sending.';
   } else if (modalPayPlatform === 'cashapp') {
     payLink.href = cfg.url;
     payLink.setAttribute('target', '_blank');
